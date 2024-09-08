@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>
+    Dexie Cloud
+  </title>
+  <meta
+    name="description"
+    content="The easiest way to use IndexedDB. A lightweight, minimalistic wrapper that provides a straightforward API for developers using IndexedDB."
+  />
+
+  <link href="/assets/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="/assets/css/prism-vscode-dark.css" rel="stylesheet" />
+  <link href="/assets/css/stylesheet.css" rel="stylesheet" />
+  <link href="/assets/css/docs.css" rel="stylesheet" />
+  <link href="/assets/css/font-awesome.min.css" rel="stylesheet" />
+  <link rel="shortcut icon" href="/assets/images/favicon-yuri.png" />
+  <script src="/assets/js/offline-switch.js"></script>
+  <script src="/assets/js/prism-highlight.js"></script>
+  <script src="/assets/js/ukraine2.js"></script>
+</head>
+
+  <body class="dexie-cloud-landing-page">
+    <nav class="navbar navbar-default" style="z-index: 10;">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <!-- <a class="navbar-brand" href="/" style="background-image: url('/assets/images/dexie-logo-icon-menu-dark-bkgimg.svg'); background-repeat: no-repeat; background-position: 7px 8px;">Dexie.js</a> -->
+      <a class="navbar-brand" href="/stop-the-war" style="white-space: nowrap;"><img alt="Support Ukraine!" src="/assets/images/ukraine-flag.png" style="
+        float: left;
+        height: 16px;
+        width: 16px;
+        margin: 2px 4px 0 0;
+    "> </a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li><a href="/"><img alt="" src="/assets/images/dexie-logo-icon-menu-dark-img.svg" class="dexie-logo-icon-menu" />Dexie.js</a></li>
+        <li><a href="/cloud/"><img alt="" src="/assets/images/dexie-logo-icon-menu-dark-img.svg" class="dexie-logo-icon-menu" />Dexie Cloud</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Docs <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="/docs/Tutorial/Getting-started">Getting Started</a></li>
+            <li><a href="/docs/Samples">Dexie.js Samples</a></li>
+            <li><a href="/docs/">Dexie.js Docs</a></li>
+            <li><a href="/docs/API-Reference#quick-reference">Dexie.js Cheat Sheet</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="/cloud/docs/">Dexie Cloud Docs</a></li>
+            <li><a href="/cloud/docs/cli">Dexie Cloud CLI</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Support <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="http://stackoverflow.com/questions/tagged/dexie">Dexie Questions on StackOverflow</a></li>
+            <li><a href="https://github.com/dexie/Dexie.js/issues?utf8=%E2%9C%93&q=is%3Aissue%20label%3Aquestion">Questions on GitHub</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="http://stackoverflow.com/questions/ask?tags=dexie">Ask Dexie question on Stackoverflow (best chance for a reply)</a></li>
+            <li><a href="https://github.com/dexie/Dexie.js/issues/new?labels=cloud,question">Ask Dexie Cloud question on GitHub</a></li>
+            <li><a href="https://github.com/dexie/Dexie.js/issues/new">File a GitHub issue on Dexie.js</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="/contact#private-support-issues">Private support</a></li>
+            <li><a href="https://betteruptime.com/report/ArgfwoqUmwYQCdwYWHRUDkdc">Report issue with Dexie Cloud service</a></li>
+            <li><a href="https://www.dexie-cloud-status.com" target="dexie-cloud-status">Dexie Cloud Status</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="/contact">Contact</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Who uses Dexie? <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a target="_blank" href="https://www.whatsapp.com/"><img class="icon" src="/assets/images/whatsapp.png"> WhatsApp</a></li>
+            <li><a target="_blank" href="https://totodo.app/"><img class="icon" src="/assets/images/totodo.ico"> To To-Do - AI Integrated Life Organizer</a></li>
+            <li><a target="_blank" href="https://todo.microsoft.com/"><img class="icon" src="/assets/images/microsoft-todo.ico"> Microsoft To Do</a></li>
+            <li><a target="_blank" href="https://desktop.github.com/"><img class="icon" src="/assets/images/github-desktop-icon.svg" > GitHub Desktop</a></li>
+            <li><a target="_blank" href="https://www.flightradar24.com/"><img class="icon" src="/assets/images/flightradar24.svg"> Flightradar24 - real-time flight info</a></li>
+            <li><a target="_blank" href="https://www.loom.com/"><img class="icon" src="/assets/images/loom.ico"> Loom - Video messaging</a></li>
+            <li><a target="_blank" href="https://wire.com/"><img class="icon" src="/assets/images/wire-icon.ico"> Wire - An end-to-end encrypted chat application</a></li>
+            <li><a target="_blank" href="https://github.com/dexie/Dexie.js/network/dependents?package_id=UGFja2FnZS0xMzg0ODIyOQ%3D%3D">... more than 20,000 repos on GitHub</a></li>
+          </ul>
+        </li>
+        <li><a href="/contact">Contact </a></li>
+        
+          <li class=""><a href="/cloud/pricing">Pricing </a></li>
+        
+        <li><a href="https://github.com/dexie/Dexie.js/releases">Releases </a></li>
+        <li><a href="/roadmap/">Road Map</a></li>
+        <li><a href="https://medium.com/dexie-js" target="dexie-blog">Blog </a></li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+
+    <div id="offline-switch">
+  <span id="offline-switch-enabled" style="display:none;" title="Make Dexie documentation available offline">
+    <span id="offlineOffHeading">Make offline</span>
+    <span id="offlineOnHeading">Available offline</span>
+    <label class="switch">
+      <input
+        id="offline-checkbox"
+    aria-labelledby="offlineOffHeading"
+        type="checkbox"
+        onchange="setOffline(event.target.checked)"
+      />
+      <span class="slider round"></span>
+    </label>
+  </span>
+  <img id="cookie-settings-icon"
+    src="/assets/images/cookie-32.png"
+    style="margin-left: 8px; width:24px;height: 24px;margin-top: -4px; cursor:pointer; display: none;"
+    alt="Cookie settings"
+    title="Cookie settings"
+    onclick="glowCookies.openSelector();"
+  />
+  <!-- <script>
+    updateSwitchFromStorage();
+  </script> -->
+</div>
+
+    
+  </div><!-- /.container-fluid -->
+</nav>		
+<script>
+    document.querySelectorAll('nav.navbar ul>li>a').forEach(function (a) {
+      var href = a.getAttribute('href');
+      href = href && href.split('#')[0];
+      if (href && location.pathname === href) {
+        //console.log("Selected: ", a.href);
+        a.closest('li').className += ' active';
+      }
+    });
+</script>
+    <header class="site-header">
+  <div class="jumbotron docs-page-jumbotron dexie-cloud">
+    <div class="video-parent">
+      <video class="banner-video" autoplay muted loop>
+        <source src="https://dexie.blob.core.windows.net/dexie/Galaxy.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="container">
+      <img src="/assets/images/dexie-logo-icon.svg" class="dexie-logo-icon" />
+      <h1><a href="/cloud/">Dexie Cloud</a></h1>
+      <p>A sync service for Dexie.js</p>
+      <a style="width: fit-content" class='getstarted btn btn-success btn-lg' href='#getting-started' role='button'>
+        <span class='glyphicon glyphicon-flash'></span>
+        <span class='widescreen'>Get Started!</span>
+        <span class='slimscreen'>Get Started!</span>
+      </a>
+      
+<!-- <div id="current-announcement" style="font-size: 14pt; padding-top: 4px; /*position: absolute; top: 50px; right: 50px;*/">
+  <a href="/announcements/2024-03-27" style="color: white; text-decoration: underline;">Announcement: Dexie Cloud is now publicly released!</a>💥 
+</div>-->
+
+
+      <script>
+        if (location.pathname !== '/cloud/') {
+          document.querySelectorAll('.getstarted.btn').forEach(btn => {
+            btn.href = '/cloud/#getting-started'
+          })
+        }
+      </script>
+    </div>
+  </div>
+</header>
+
+
+    <main class="container">
+      <div id="signup-form" style="display: none;">
+  <div class="row">
+    <div class="col-md-12">
+      <h3>Try Dexie Cloud Now!</h3>
+      <br/>
+      <label for="emailAddressInput">Please enter email address to request <b>early-bird access</b></label>
+      <div class="input-group input-group-lg">
+        <span class="input-group-addon">@</span>
+        <input id="emailAddressInput" type="text" autocomplete="email" class="form-control" placeholder="you@example.com">
+      </div>
+      <div id="emailAddrAlert" class="alert alert-warning" role="alert" style="display: none;">
+        Invalid email address
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <p>We will not share your email with anyone else.</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <button class="btn btn-primary mb-2 applyBetaBtn" id="applyBetaBtn"></span> Submit! </button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12" style="margin-top:8px;">
+      <p>Also, keep an eye on the <a style="color: rgb(61, 240, 156); text-decoration: underline;" href="https://medium.com/dexie-js" target="dexie-blog">Dexie.js blog</a> for road map and other updates.</p>
+    </div>
+  </div>
+  <hr/>
+</div>
+<div id="form-prompts" style="display: none;">
+  <div id="form-prompts-spinner">
+    <div>
+      <img src="/assets/images/ellipsis-loader.svg" style="padding: 0; margin: 8px; border: 0" />
+      Please wait...
+    </div>
+  </div>
+  <div id="form-prompts-area">          
+  </div>
+  <hr/>
+</div>
+<script src="/assets/js/form-prompts.js"></script>
+
+      <div class="shoutouts">
+        <p>
+          Create awesome offline-first apps that syncs
+        </p>
+        <p>
+          Keep writing client-side code. We provide the server.
+        </p>
+        <p>
+          Multi user access control
+        </p>
+        <p>
+          Sharded and scalable
+        </p>
+        <p>
+          Eager sync and collaboration when online
+        </p>
+        <p>
+          Periodic sync when app not active
+        </p>
+        <!-- <ul>
+            <li>Online collaboration</li>
+            <li>Offline email clients</li>
+            <li>Calendars</li>
+            <li>Enterprise collaboration</li>
+            <li>Offline Warehousing</li>
+            <li>Diaries</li>
+            <li>Todos</li>
+            <li>Games</li>
+            <li>...and more</li>
+          </ul>-->
+      </div>
+      <hr />
+      <div id="callouts">
+        <div class="row">
+
+          <div class="col-md-3">
+            <h2>Almost Zero Config</h2>
+            <p>
+              Create your <span style="font-weight: bold;">database</span> in the cloud by just running a simple <span style="font-weight: bold;">npx</span> command!
+              Use the new <span style="font-weight: bold;">dexie-cloud-addon</span> to connect your Dexie database with the cloud and enjoy multi-user bidirectional sync.
+            </p>
+            <p>
+              <a class="btn btn-success" onclick="typeof ga !== undefined && ga('send', 'event', 'buttons', 'click', 'cloud-get-started-btn')" href="#getting-started" role="button"
+                >Get started &raquo;</a
+              >
+            </p>
+          </div>
+          <div class="col-md-3">
+            <h2>Authentication</h2>
+            <p>
+              Passwordless email OTP is part of the service so you don't have to deal with setting up auth.
+              Have auth already? Skip our default auth and use your own instead!
+            </p>
+            <p>
+              <a class="btn btn-success" href="docs/authentication" role="button"
+                >Read more &raquo;</a
+              >
+            </p>
+          </div>
+          <div class="col-md-3">
+            <h2>Access Control</h2>
+            <p>
+              A per-object access model lets your users keep their synced private data for
+              themselves or shared with their teams or friends. Build your access control models
+              using simple javascript objects.
+            </p>
+            <p>
+              <a class="btn btn-success" href="docs/access-control" role="button"
+                >Read more &raquo;</a
+              >
+            </p>
+          </div>
+          <div class="col-md-3">
+            <h2>Consistent Sync</h2>
+            <p>
+              Dexie Cloud doesn't just sync individual CRUD operations - it syncs the where-expressions along with the operations, making it possible to keep related data consistent.
+            </p>
+            <p>
+              <a class="btn btn-success" href="docs/consistency" role="button"
+                >Read more &raquo;</a
+              >
+            </p>
+          </div>
+        </div>
+      </div>
+      <hr/>
+      <style>
+  .testimonial {
+    background-color: #f9f9f9;
+    padding: 20px;
+    margin: 20px;
+    border-radius: 10px;
+    min-height: 350px;
+  }
+  @media (max-width: 768px) {
+    .testimonial {
+      margin: 20px 0;
+      padding: 5px;
+    }
+  }
+  
+  .testimonial p.undertext {
+    font-size: 14px;
+    font-family: Georgia, Times, 'Times New Roman', serif;
+  }
+</style>
+<div class='container'>
+  <div class='row'>
+    <div class='col-md-6'>
+      <div class="testimonial">
+        <img class="headshot" style="float:left;" src="/assets/images/testimonials/bennie.jpg">
+        <p class="quote small">
+          “After exploring several options, including major players like Firebase, I felt constrained by their complexity and locking structures. I sought a platform that not only fostered creativity but also expanded our possibilities.
+          <br/>
+
+          That's when I discovered Dexie Cloud. In just one year, <b>I've single-handedly built a hybrid web and mobile application for iOS and Android, complete with automatic data synchronization across all devices.</b> The transition from traditional Dexie with live queries to fully integrated Dexie Cloud was seamless and took only a few minutes.
+          <br/><br/>
+          <b>What truly sets Dexie Cloud apart is its ability to unleash productivity and nurturing creativity</b>. Unlike other platforms, Dexie Cloud doesn't confine our visions; it expands them. It gives us the freedom to explore and experiment without being limited by complex structures or preconceived ideas.
+          <br/><br/>
+
+          Moreover, the support, documentation, and community have been invaluable. Dexie Cloud is more than just a service; it supports and inspires growth and progress.
+          <br/><br/>
+          
+          <b>I'm completely sold!</b> Even considering alternatives like CouchDB or Firestore now feels restrictive and cumbersome. <b>Dexie Cloud opens doors to a world of possibilities</b> and makes me look forward to every step of our journey, including multiple apps, prototypes, and client projects."
+        </p>
+        <p class="quote-author small">- Bennie Forss, Founder of Zenta AB</p>
+        <p class="undertext">
+          <a href="https://www.zenta.se/">Zenta AB</a> is using Dexie Cloud to power their app <a href="https://totodo.app">To To-do</a>. It's an AI-driven offline-first task manager that helps users plan their day and reach their goals: <a href="https://totodo.app">https://totodo.app</a>
+        </p>
+      </div>
+    </div>
+    <div class='col-md-6'>
+      <div class="testimonial">
+        <img class="headshot" style="float:right;" src="/assets/images/testimonials/albarin.jpg">
+        <p class="quote small">
+          “I started using Dexie for my project, and I was worried about integrating user authentication and synchronization into it. However,
+          <b>when I discovered Dexie Cloud, I was amazed at how seamlessly I could integrate it into my app.</b> Within minutes, I had my application fully synchronized and authenticated. The documentation provided by Dexie Cloud was also very helpful. It's well-organized and has lots of examples that made it easy to understand and use."
+        </p>
+        <p class="quote-author small">- Alba Rincon, founder of Routickr</p>
+        <p class="undertext">
+          <a href="https://www.routickr.com">Routickr</a> is an app that will help users to transform their goals into lasting habits: <a href="https://www.routickr.com">https://www.routickr.com</a>.
+        </p>
+      </div>
+
+      <div class="testimonial">
+        <img class="headshot" style="float:right;" src="/assets/images/testimonials/dusty2.jpeg">
+        <p class="quote small">
+          “<b><u>Offline-first web apps are no longer difficult</u></b>. Dexie Cloud gave Fablehenge a truly backendless experience and has been essential for our tiny dev team to ship big features like it already happened.
+          <b>It is the perfect abstraction in front of the endless complexity two-way sync normally entails.</b>
+          Just write your data to IndexedDB with Dexie's best-in-class API. It'll show up where it's supposed to. Nothing could be simpler."
+        </p>
+        <p class="quote-author small">- Dusty Phillips, founder of Fablehenge</p>
+        <p class="undertext">
+          <a href="https://www.fablehenge.com/">Fablehenge</a> is an app for story writers to help them track their character relationships, reorganize their outline, and manage their drafts: <a href="https://www.fablehenge.com/">https://www.fablehenge.com/</a>
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class='row'>
+    <div class="col-md-6">
+      <div class="testimonial">
+        <img class="headshot" style="float:left;" src="/assets/images/testimonials/naton2.jpeg">
+        <p class="quote small">
+          “The speed with which you can start and complete an observation is crucial to whether you will prefer my app to Notes - or even pen and paper - at all.
+
+          <b>The discovery of Dexie Cloud made me realize that my bird lists could be shared with others and that there were also ready-made code examples</b> on how to manage invitations, rights and similar things.”          
+        </p>
+        <p class="quote-author small">- Anton Andreasson, founder of Birdlist</p>
+
+        <p class="undertext">
+          <a href="https://birdlist.app/">Birdlist</a> is an app for birdwatchers that helps them log their observations, create lists, and share them with friends.
+        </p>
+      </div>
+    </div>
+    <div class='col-md-6'>
+    </div>
+  </div>
+</div>
+
+      <h1 id="what-it-is">What it is:</h1>
+      <ul style="padding: 32px; list-style-type: none; max-width: 90%; font-size: 12pt;">
+        <li style="margin: 16px 0">
+          <i class="fa fa-hand-o-right" aria-hidden="true" style="margin-left: -24px; width: 24px;"></i>Think plain Dexie.js but also with online sync. Write completely Offline-First apps using Dexie.js
+          as your sole storage model. Then let Dexie Cloud sync your data with the cloud.
+        </li>
+        <li style="margin: 16px 0">
+          <i class="fa fa-hand-o-right" aria-hidden="true" style="margin-left: -24px; width: 24px;"></i>The data in the cloud is protected using authentication and authorization to
+          prohibit unauthorized access.
+        </li>
+        <li style="margin: 16px 0">
+          <i class="fa fa-hand-o-right" aria-hidden="true" style="margin-left: -24px; width: 24px;"></i>Data can be shared between multiple or individual users, making it possible to
+          build reactive online collaboration apps hosted on a static web page without bothering about a server. And of course: with offline support so there's no problem sending a chat
+          messages or look at the latest conversation while the network is down.
+        </li>
+      </ul>
+      <!-- <div class='container'>
+  <div class='row'>
+    <h1 style="text-align: center; margin: 0 0 10px 0;">Please select edition</h1>
+  </div>
+  <div class='row'>
+    <div class='col-md-3'>
+      <div class="pricing-box free" role="button" data-section="#free-edition" onclick="location.href='/cloud/#getting-started'">
+  <h4>Free (SaaS)</h4>
+  <p class="price">$ 0</p>
+  <ul class="features">
+    <li>3 prod users</li>
+    <li>100 MB storage</li>
+    <li>Infinite eval users</li>
+    <li>10 connections</li>
+  </ul>
+  <p class="explanation">
+    Choose this option to get started with Dexie Cloud
+  </p>
+</div>
+
+    </div>
+    <div class='col-md-3'>
+      <div class="pricing-box production" role="button" data-section="#prod-edition" onclick="location.href='https://buy.stripe.com/14k9CEgSne5D1BS8ww'">
+  <h4>Production (SaaS)</h4>
+  <p class="price">$ 0.12 / user / mo</p>
+  <ul class="features">
+    <li>25+ prod users</li>
+    <li>25+ GB</li>
+    <li>50+ connections</li>
+    <li>Infinite eval users</li>
+    <li>Increased rate-limits</li>
+  </ul>
+  <p class="explanation">
+    Choose this option when users get on-board
+  </p>
+</div>
+
+    </div>
+    <div class='col-md-3'>
+      <div class="pricing-box onprem-silver" role="button" data-section="#silver-edition" onclick="location.href='https://buy.stripe.com/8wM8yAfOjf9HbcsfZ0'">
+  <h4>On-Prem Silver</h4>
+  <p class="price">$ 3,495</p>
+  <p class="under-price">(one-time)</p>
+  <ul class="features">
+    <li>Install on your own servers</li>
+    <li>No limits or recurring costs</li>
+    <li>5 years software updates</li>
+    <li>1 year <a href="/cloud/pricing#silver-support" onclick="event.stopPropagation()">Silver Support</a></li>
+  </ul>
+  <p class="explanation">
+    Opt for this when you need full control over your data.
+  </p>
+</div>
+
+    </div>
+    <div class='col-md-3'>
+      <div class="pricing-box onprem-gold" role="button" data-section="#gold-edition" onclick="location.href='https://buy.stripe.com/cN21680Tp2mVeoE9AD'">
+  <h4>On-Prem Gold</h4>
+  <p class="price">$ 7,995</p>
+  <p class="under-price">(one-time)</p>
+  <ul class="features">
+    <li>Full Source code</li>
+    <li>Install on your own servers</li>
+    <li>No limits or recurring costs</li>
+    <li>5 years software updates</li>
+    <li>1 year <a href="/cloud/pricing#gold-support" onclick="event.stopPropagation()">Gold Support</a></li>
+  </ul>
+  <p class="explanation">
+    When you need deeper integration and support
+  </p>
+</div>
+
+    </div>
+  </div>
+</div>
+<script>
+  document.querySelectorAll('.pricing-box').forEach(box => {
+    const dataSection = box.getAttribute('data-section');
+    box.onclick = () => {
+      document.querySelector(dataSection)?.scrollIntoView({behavior:'smooth'});
+      history.pushState(null, null, dataSection);
+    };
+  });
+</script>
+
+      <script>
+        document.querySelectorAll('.pricing-box.free').forEach(box => box.onclick = () => {
+          document.getElementById('getting-started').scrollIntoView({behavior: 'smooth'});
+          history.pushState(null, null, '#getting-started');
+        });
+      </script> -->
+      <hr/>
+      <h2 id="getting-started">Get started</h2>
+        <p>This guide assumes you're already using Dexie.js and now want to connect it to Dexie Cloud.
+        </p>
+        <div class='row'>
+          <div class='col-md-6'>
+            <h3 class="widescreen">1. Create your database in the cloud</h3>
+            <h3 class="slimscreen">1. Create your db in the cloud</h3>
+            <pre class="command-line language-bash" data-prompt="~/my-web-app $" data-filter-output="(out)"><code style="margin:0;">npx dexie-cloud create</code></pre>
+            <p>You'll be prompted for email verification. Then <span style="font-weight: bold;">the URL of your database</span>
+              will output to the console and stored in a new local file <span style="font-family: monospace;">dexie-cloud.json</span>.
+            <span style="font-style: italic;">See the <a href="/cloud/docs/cli">CLI docs</a>.</span></p>
+            <h3>2. Whitelist your app origin(s)</h3>
+            <pre class="command-line language-bash" data-prompt="~/my-web-app $"><code style="margin:0;">npx dexie-cloud whitelist http://localhost:3000</code></pre>
+            <h3>3. Upgrade dexie + install dexie-cloud-addon</h3>
+            <pre class="command-line language-bash" data-prompt="~/my-web-app $"><code style="margin:0;">npm install dexie@latest
+npm install dexie-cloud-addon</code></pre>
+          </div>
+          <div class='col-md-6'>
+            <h3>4. Update your DB declaration</h3>
+            <pre><code class="language-javascript" id="update-db-declaration" style="margin:0;">  import Dexie from "dexie";
+  import dexieCloud from "dexie-cloud-addon";
+
+  const db = new Dexie('SyncedFriends', {addons: [dexieCloud]});
+
+  db.version(1).stores({
+    friends: '++id, name, age' // '++' = auto-incremented ID
+    friends: '@id, name, age' // '@' = auto-generated global ID
+  });
+
+  // Connect your dexie-cloud database:
+  db.cloud.configure({
+    databaseUrl: "https://&lt;yourdatabase&gt;.dexie.cloud",
+    requireAuth: true // optional
+  });</code></pre>
+  <script>
+    prismHighlight('update-db-declaration', [
+      'import dexieCloud from "dexie-cloud-addon";',
+      "{addons: [dexieCloud]}",
+      {text: "friends: '++id, name, age' // '++' = auto-incremented ID", action: 'strikethrough'},
+      "friends: '@id, name, age' // '@' = auto-generated global ID",
+      ///(\/\/.*)/g, // line comments
+      /db\.cloud\.configure\(\{(.|\n)*\}\)\;/g
+
+    ]);
+  </script>
+          <ul style="padding-left: 0; list-style-type: none;">
+            <li style="font-style: italic;"><i class="fa fa-hand-o-right" aria-hidden="true"></i> The <span style="color: #ce9178;">'@'</span> character is optional and makes the primary key auto-generated unique string.</li>
+            <li style="font-style: italic;"><i class="fa fa-hand-o-right" aria-hidden="true"></i> <span style="font-family: monospace; color: #6f9db8;">databaseUrl</span> is the one printed out in step 1.</li>
+          </ul>
+          </div>
+          </div>
+
+          <!--<button style="width: fit-content" id="sign-up-beta-btn" class='sign-up-beta-btn getstarted btn btn-success btn-lg' href='/cloud/#getting-started' role='button'>
+            <span class='glyphicon glyphicon-flash'></span>
+            <span>Try it now!</span>
+          </button>-->
+    
+          <h3>5. Done!</h3>
+          <p>Enjoy.</p>
+          <p>
+            With this very simple and default setup, users will be requested to login using passwordless email OTP the very first time they visit your app
+            from a device or browser. Learn how to customize <a href="/cloud/docs/authentication">authentication</a> if you already have another authentication in place,
+            or want to integrate with the authentication of your choice.
+          </p>
+          <p>Use your <span style="font-family: monospace">db</span> with the simple <a href="/docs/API-Reference">Dexie API</a> you are used to
+            for mutating and querying data.
+            IDs marked <span style="color: #ce9178;">'@'</span> gets auto-generated keys similar to Dexie's <a href="/docs/Version/Version.stores()#schema-syntax">++</a>
+            but with a globally unique string rather than an auto-incremented number.
+          </p>
+          <p>Changes sync instantly with the cloud in both directions. When offline, changes are queued until next time user goes online.
+            When online, changes will be synced eagerly in both directions.
+            If user is idle for a time, the client will go over to periodic sync strategy instead of the eager sync.
+            As soon as user starts interact with the application (mouse moves or key strokes), the app will go over to eager sync mode again.
+          </p>
+          <p>Without taking advantage of the <a href="/cloud/docs/access-control">access control</a> features, all data
+            will be regarded private for the end user and stored on a per-user basis.
+            Improve your app by allowing users to <a href="/cloud/docs/access-control#example-sharable-todo-list">share things to their team or friends</a>.
+          </p>
+      </div>
+  
+      <hr />
+          <div class='container' id="free-edition">
+      <div class='row'>
+        <div class="col-md-12">
+          <h2 style="text-align: center; margin: 30px 0;">The Free Edition</h2>
+        </div>
+      </div>
+      <div class='row'>
+        <div class='col-md-3'>
+          <div class="pricing-box free" role="button" data-section="#free-edition" onclick="location.href='/cloud/#getting-started'">
+  <h4>Free (SaaS)</h4>
+  <p class="price">$ 0</p>
+  <ul class="features">
+    <li>3 prod users</li>
+    <li>100 MB storage</li>
+    <li>Infinite eval users</li>
+    <li>10 connections</li>
+  </ul>
+  <p class="explanation">
+    Choose this option to get started with Dexie Cloud
+  </p>
+</div>
+
+        </div>
+        <div class='col-md-9'>
+          <div class="pricing-box-height" style="margin: 20px 5px; position: relative;">
+              <p style="font-size: 20px;">
+                Enter the world of Dexie Cloud by building powerful apps that run in any browser, phone or desktop, superpowered with
+                local-first storage.
+              </p>
+              <p style="font-size: 16px;padding-left: 24px;"><i class="fa fa-hand-o-right" aria-hidden="true" style="margin-left: -24px; width: 24px;margin-top:10px"></i>
+                All features are available including Authentication, Access Control, REST-API and Dexie Cloud Manager.
+              </p>
+              <p style="font-size: 16px;padding-left: 24px;"><i class="fa fa-hand-o-right" aria-hidden="true" style="margin-left: -24px; width: 24px;"></i>
+                Continue developing your app as long as it takes! Its' forever free.
+              </p>
+              <br/>
+              <p class="quote">"I was procrastinating on adding Dexie Cloud as I was waiting until I had a decent block of time, but it took me all of 10 minutes."</p>
+              <p class="quote-author">- Rupert Manfredi, developer of an AI integrated Dexie Cloud app</p>
+              <br/>
+              
+          </div>
+        </div>
+      </div>
+    </div>
+
+      <hr />
+          <div class='container' id="prod-edition">
+      <div class='row'>
+        <div class="col-md-12">
+          <h2 style="text-align: center; margin: 30px 0;">Dexie Cloud Production</h2>
+        </div>
+      </div>
+      <div class='row'>
+        <div class='col-md-3'>
+          <div class="pricing-box production" role="button" data-section="#prod-edition" onclick="location.href='https://buy.stripe.com/14k9CEgSne5D1BS8ww'">
+  <h4>Production (SaaS)</h4>
+  <p class="price">$ 0.12 / user / mo</p>
+  <ul class="features">
+    <li>25+ prod users</li>
+    <li>25+ GB</li>
+    <li>50+ connections</li>
+    <li>Infinite eval users</li>
+    <li>Increased rate-limits</li>
+  </ul>
+  <p class="explanation">
+    Choose this option when users get on-board
+  </p>
+</div>
+
+        </div>
+        <div class='col-md-9'>
+          <!-- <div class="pricing-box-height" style="position:relative;">
+            <div class="vertical-center"> -->
+            <div class="pricing-box-height" style="margin: 20px 5px; position: relative;">
+              <p style="font-size: 20px; margin-bottom: 16px;">When it's time to get serious!</p>
+              <p style="font-size: 16px;padding-left: 24px;"><i class="fa fa-hand-o-right" aria-hidden="true" style="margin-left: -24px; width: 24px;"></i>
+                Subscription is purchased in packs of <b>25 seats</b> for only <b>$3</b> per month. 
+              </p>
+              <p style="font-size: 16px;padding-left: 24px;"><i class="fa fa-hand-o-right" aria-hidden="true" style="margin-left: -24px; width: 24px;"></i>
+                After purchase, use <a href="https://manager.dexie.cloud" targe="_blank">Dexie Cloud Manager</a> to assign seats to your end users.
+              </p>
+              <p style="font-size: 16px;padding-left: 24px;"><i class="fa fa-hand-o-right" aria-hidden="true" style="margin-left: -24px; width: 24px;"></i>
+                Increase or decrease number of seat packs with a few clicks in <a href="https://manager.dexie.cloud" targe="_blank">Dexie Cloud Manager</a>.
+              </p>
+              <p style="font-size: 16px; padding-left: 24px;"><i class="fa fa-hand-o-right" aria-hidden="true" style="margin-left: -24px; width: 24px;"></i>
+                Automate users and seat assignment using the <a href="https://dexie.org/cloud/docs/rest-api">REST api</a>.
+              </p>
+              <br/>
+              <p class="quote small" style="margin-left: 36px;">"Dexie Cloud gave Fablehenge a truly backendless experience and has been essential for our tiny dev team to ship big features like it already happened. It is the perfect abstraction in front of the endless complexity two-way sync normally entails. Just write your data to IndexedDB with Dexie's best-in-class API. It'll show up where it's supposed to. Nothing could be simpler."</p>
+              <p class="quote-author small">- Dusty Phillips, founder of Fablehenge</p>
+              <!-- <p class="quote">"Dexie Cloud opens doors to a world of possibilities and makes me look forward to every step of our journey, including multiple apps, prototypes, and client projects."</p> 
+              <p class="quote-author small">- Bennie Forss, Zenta AB</p>-->
+
+              <p style="font-size: 20px;">
+                <a href="https://buy.stripe.com/14k9CEgSne5D1BS8ww">Buy now &raquo;</a>
+              </p>
+            </div>
+            <!-- </div>
+          </div> -->
+        </div>
+      </div>
+    </div>
+
+      <hr />
+      <div class="container" id="silver-edition">
+  <div class="row">
+    <div class="col-md-12">
+      <h2 style="text-align: center; margin: 30px 0">On-Prem Silver</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-3"><div class="pricing-box onprem-silver" role="button" data-section="#silver-edition" onclick="location.href='https://buy.stripe.com/8wM8yAfOjf9HbcsfZ0'">
+  <h4>On-Prem Silver</h4>
+  <p class="price">$ 3,495</p>
+  <p class="under-price">(one-time)</p>
+  <ul class="features">
+    <li>Install on your own servers</li>
+    <li>No limits or recurring costs</li>
+    <li>5 years software updates</li>
+    <li>1 year <a href="/cloud/pricing#silver-support" onclick="event.stopPropagation()">Silver Support</a></li>
+  </ul>
+  <p class="explanation">
+    Opt for this when you need full control over your data.
+  </p>
+</div>
+</div>
+    <div class="col-md-9">
+      <!-- <div class="pricing-box-height" style="position:relative;">
+        <div class="vertical-center"> -->
+      <div
+        class="pricing-box-height"
+        style="margin: 20px 5px; position: relative"
+      >
+        <p style="font-size: 20px; margin-bottom: 16px">
+          Run the software run on your own servers or cloud infrastructure
+        </p>
+        <p style="font-size: 16px; padding-left: 24px">
+          <i
+            class="fa fa-hand-o-right"
+            aria-hidden="true"
+            style="margin-left: -24px; width: 24px"
+          ></i>
+          License to use the software forever.
+        </p>
+        <p style="font-size: 16px; padding-left: 24px">
+          <i
+            class="fa fa-hand-o-right"
+            aria-hidden="true"
+            style="margin-left: -24px; width: 24px"
+          ></i>
+          No limits on storage or number of users. No or recurring costs.
+        </p>
+        <p style="font-size: 16px; padding-left: 24px">
+          <i
+            class="fa fa-hand-o-right"
+            aria-hidden="true"
+            style="margin-left: -24px; width: 24px"
+          ></i>
+          Gain complete control over the location of your data for legal or
+          compliance reasons.
+        </p>
+        <p style="font-size: 16px; padding-left: 24px">
+          <i
+            class="fa fa-hand-o-right"
+            aria-hidden="true"
+            style="margin-left: -24px; width: 24px"
+          ></i>
+          5 years of software updates and 1 year of
+          <a href="/cloud/pricing#silver-support">Silver Support</a> included in
+          the price.
+        </p>
+        <br />
+        <p class="quote small" style="margin-left: 36px">
+          “After exploring several options, including major players like
+          Firebase, I felt constrained by their complexity and locking
+          structures. I sought a platform that not only fostered creativity but
+          also expanded our possibilities."
+        </p>
+        <p class="quote-author small">
+          - Bennie Forss, Founder of
+          <a href="https://www.zenta.se/">Zenta AB</a>
+        </p>
+
+        <div
+          style="
+            font-size: 18px;
+            display: flex;
+            justify-content: start;
+            width: 100%;
+            margin-top: 30px;
+          "
+        >
+          <a
+            style="padding: 0 10px; white-space: nowrap"
+            href="https://buy.stripe.com/8wM8yAfOjf9HbcsfZ0"
+            >Buy Now &raquo;</a
+          >
+          /&nbsp;
+          <!-- Calendly link widget begin -->
+          <link
+            href="https://assets.calendly.com/assets/external/widget.css"
+            rel="stylesheet"
+          />
+          <script
+            src="https://assets.calendly.com/assets/external/widget.js"
+            type="text/javascript"
+            async
+          ></script>
+          <a
+            href=""
+            onclick="Calendly.initPopupWidget({url: 'https://calendly.com/david-fahlander-awarica/30min'});return false;"
+            >Schedule a meeting &raquo;</a
+          >
+          <!-- Calendly link widget end -->
+          &nbsp;/
+          <a
+            style="padding: 0 10px"
+            href="https://account.wire.com/conversation-join/?key=earNGQtQbLegPGpz8jAX&code=t8lYpyUrpgFyp53w3vvE&domain=wire.com"
+            >Chat with us &raquo;</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+      <hr />
+      <div class="container" id="gold-edition">
+  <div class="row">
+    <div class="col-md-12">
+      <h2 style="text-align: center; margin: 30px 0">On-Prem Gold</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-3"><div class="pricing-box onprem-gold" role="button" data-section="#gold-edition" onclick="location.href='https://buy.stripe.com/cN21680Tp2mVeoE9AD'">
+  <h4>On-Prem Gold</h4>
+  <p class="price">$ 7,995</p>
+  <p class="under-price">(one-time)</p>
+  <ul class="features">
+    <li>Full Source code</li>
+    <li>Install on your own servers</li>
+    <li>No limits or recurring costs</li>
+    <li>5 years software updates</li>
+    <li>1 year <a href="/cloud/pricing#gold-support" onclick="event.stopPropagation()">Gold Support</a></li>
+  </ul>
+  <p class="explanation">
+    When you need deeper integration and support
+  </p>
+</div>
+</div>
+    <div class="col-md-9">
+      <!-- <div class="pricing-box-height" style="position:relative;">
+        <div class="vertical-center"> -->
+      <div
+        class="pricing-box-height"
+        style="margin: 20px 5px; position: relative"
+      >
+        <p style="font-size: 20px; margin-bottom: 16px">
+          Buy off the software and do whatever you want with it (except
+          <a href="/cloud/server-software-license-terms">competing with us</a>)
+        </p>
+        <p style="font-size: 16px; padding-left: 24px">
+          <i
+            class="fa fa-hand-o-right"
+            aria-hidden="true"
+            style="margin-left: -24px; width: 24px"
+          ></i>
+          License to use the software forever. Source code included.
+        </p>
+        <p style="font-size: 16px; padding-left: 24px">
+          <i
+            class="fa fa-hand-o-right"
+            aria-hidden="true"
+            style="margin-left: -24px; width: 24px"
+          ></i>
+          No limits on storage or number of users. No or recurring costs.
+        </p>
+        <p style="font-size: 16px; padding-left: 24px">
+          <i
+            class="fa fa-hand-o-right"
+            aria-hidden="true"
+            style="margin-left: -24px; width: 24px"
+          ></i>
+          Gain complete control over the location of your data for legal or
+          compliance reasons.
+        </p>
+        <p style="font-size: 16px; padding-left: 24px">
+          <i
+            class="fa fa-hand-o-right"
+            aria-hidden="true"
+            style="margin-left: -24px; width: 24px"
+          ></i>
+          5 years of software updates (binaries) and 1 year of
+          <a href="/cloud/pricing#gold-support">Gold Support</a> included in the
+          price.
+        </p>
+        <br />
+        <p class="quote small" style="margin-left: 36px">
+          “<b>I'm completely sold!</b> Even considering alternatives like
+          CouchDB or Firestore now feels restrictive and cumbersome.
+          <b>Dexie Cloud opens doors to a world of possibilities</b> and makes
+          me look forward to every step of our journey, including multiple apps,
+          prototypes, and client projects."
+        </p>
+        <p class="quote-author small">
+          - Bennie Forss, Founder of
+          <a href="https://www.zenta.se/">Zenta AB</a>
+        </p>
+
+        <div
+          style="
+            font-size: 18px;
+            display: flex;
+            justify-content: start;
+            width: 100%;
+            margin-top: 30px;
+          "
+        >
+          <a
+            style="padding: 0 10px; white-space: nowrap"
+            href="https://buy.stripe.com/8wM8yAfOjf9HbcsfZ0"
+            >Buy Now &raquo;</a
+          >
+          /&nbsp;
+          <!-- Calendly link widget begin -->
+          <link
+            href="https://assets.calendly.com/assets/external/widget.css"
+            rel="stylesheet"
+          />
+          <script
+            src="https://assets.calendly.com/assets/external/widget.js"
+            type="text/javascript"
+            async
+          ></script>
+          <a
+            href=""
+            onclick="Calendly.initPopupWidget({url: 'https://calendly.com/david-fahlander-awarica/30min'});return false;"
+            >Schedule a meeting &raquo;</a
+          >
+          <!-- Calendly link widget end -->
+          &nbsp;/
+          <a
+            style="padding: 0 10px"
+            href="https://account.wire.com/conversation-join/?key=earNGQtQbLegPGpz8jAX&code=t8lYpyUrpgFyp53w3vvE&domain=wire.com"
+            >chat with us &raquo;</a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+      <hr />
+
+        
+      <h2 id="want-to-know-more">Want to know more?</h2>
+
+<p><i class="fa fa-hand-o-right" aria-hidden="true"></i> <a href="docs/access-control">Access Control in Dexie Cloud</a></p>
+
+<p><i class="fa fa-hand-o-right" aria-hidden="true"></i> <a href="docs/authentication">Authentication in Dexie Cloud</a></p>
+
+<p><i class="fa fa-hand-o-right" aria-hidden="true"></i> <a href="docs/consistency">Consistency in Dexie Cloud</a></p>
+
+<h3 id="examples">Examples</h3>
+
+<p><i class="fa fa-code" aria-hidden="true"></i> <a href="docs/access-control#example-shareable-todo-list">Create a shareable ToDo list</a></p>
+
+<p><i class="fa fa-code" aria-hidden="true"></i> <a href="docs/access-control#example-a-simple-project-management-model">Create a role-based access controlled project management model</a></p>
+
+<p><i class="fa fa-code" aria-hidden="true"></i> <a href="docs/db.cloud.configure()#example-integrate-custom-authentication">Integrate with PassportJS authentication</a></p>
+
+<p><br /></p>
+
+    </main>
+    <footer class="container">
+  <p>Dexie.js - A Minimalistic Wrapper for IndexedDB</p>
+  <p>&copy; 2014-2024 Dexie.js is the creation of David Fahlander and managed by Awarica AB.</p>
+</footer>
+
+
+    <script src="/assets/js/prism-2020.js"></script>
+		<script src='/assets/js/jquery.min.js'></script>
+    <script src='/assets/js/bootstrap.min.js'></script>
+    <script src="/assets/js/anime.min.js"></script>
+    <script src="/assets/js/shoutouts.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", prismHighlight.highlight);
+    </script>
+    <script src="/assets/js/scroll-to-anchor.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/gh/manucaralmo/GlowCookies@3.1.8/src/glowCookies.min.js"></script>
+<script>
+  document.getElementById('cookie-settings-icon').style.display = localStorage.getItem('GlowCookies') == "1" ? 'none' : '';
+  glowCookies.start('en', {
+      style: 1,
+      analytics: 'G-7W0YET4Q10',
+      hideAfterClick: true,
+      policyLink: 'https://dexie.org/privacy',
+      customScript: [{ type: 'custom', position: 'body', content: "updateSwitchFromStorage();" }]
+  });
+</script>
+<!--
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7W0YET4Q10"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7W0YET4Q10');
+</script>
+-->
+
+
+
+    <!-- Include dexie for people wanting to open devtools to laborate -->
+    <script async src="https://unpkg.com/dexie"></script>
+
+    <!-- Highlight anchors the same way as github wiki works -->
+    <script defer src="/assets/js/highlight-anchors.js"></script>
+  </body>
+</html>

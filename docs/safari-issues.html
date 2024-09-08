@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <title>
-    Purchase Subscription
+    Safari-related issues
   </title>
   <meta
     name="description"
@@ -95,8 +95,6 @@
         </li>
         <li><a href="/contact">Contact </a></li>
         
-          <li class=""><a href="/cloud/pricing">Pricing </a></li>
-        
         <li><a href="https://github.com/dexie/Dexie.js/releases">Releases </a></li>
         <li><a href="/roadmap/">Road Map</a></li>
         <li><a href="https://medium.com/dexie-js" target="dexie-blog">Blog </a></li>
@@ -153,9 +151,9 @@
       </div> -->
       
       
-      
+      <img src="/assets/images/dexie-logo-icon.svg" class="dexie-logo-icon" />
       <h1>
-      Purchase Subscription
+        <a href="/">Dexie.js Docs</a>
       </h1>
       
 
@@ -192,62 +190,19 @@
 
 
     <main class="container">
-          <div class='container' id="prod-edition">
-      <div class='row'>
-        <div class="col-md-12">
-          <h2 style="text-align: center; margin: 30px 0;">Dexie Cloud Production</h2>
-        </div>
-      </div>
-      <div class='row'>
-        <div class='col-md-3'>
-          <div class="pricing-box production" role="button" data-section="#prod-edition" onclick="location.href='https://buy.stripe.com/14k9CEgSne5D1BS8ww'">
-  <h4>Production (SaaS)</h4>
-  <p class="price">$ 0.12 / user / mo</p>
-  <ul class="features">
-    <li>25+ prod users</li>
-    <li>25+ GB</li>
-    <li>50+ connections</li>
-    <li>Infinite eval users</li>
-    <li>Increased rate-limits</li>
-  </ul>
-  <p class="explanation">
-    Choose this option when users get on-board
-  </p>
-</div>
+      <h2 id="safari-related-issues">Safari-related issues</h2>
 
-        </div>
-        <div class='col-md-9'>
-          <!-- <div class="pricing-box-height" style="position:relative;">
-            <div class="vertical-center"> -->
-            <div class="pricing-box-height" style="margin: 20px 5px; position: relative;">
-              <p style="font-size: 20px; margin-bottom: 16px;">When it's time to get serious!</p>
-              <p style="font-size: 16px;padding-left: 24px;"><i class="fa fa-hand-o-right" aria-hidden="true" style="margin-left: -24px; width: 24px;"></i>
-                Subscription is purchased in packs of <b>25 seats</b> for only <b>$3</b> per month. 
-              </p>
-              <p style="font-size: 16px;padding-left: 24px;"><i class="fa fa-hand-o-right" aria-hidden="true" style="margin-left: -24px; width: 24px;"></i>
-                After purchase, use <a href="https://manager.dexie.cloud" targe="_blank">Dexie Cloud Manager</a> to assign seats to your end users.
-              </p>
-              <p style="font-size: 16px;padding-left: 24px;"><i class="fa fa-hand-o-right" aria-hidden="true" style="margin-left: -24px; width: 24px;"></i>
-                Increase or decrease number of seat packs with a few clicks in <a href="https://manager.dexie.cloud" targe="_blank">Dexie Cloud Manager</a>.
-              </p>
-              <p style="font-size: 16px; padding-left: 24px;"><i class="fa fa-hand-o-right" aria-hidden="true" style="margin-left: -24px; width: 24px;"></i>
-                Automate users and seat assignment using the <a href="https://dexie.org/cloud/docs/rest-api">REST api</a>.
-              </p>
-              <br/>
-              <p class="quote small" style="margin-left: 36px;">"Dexie Cloud gave Fablehenge a truly backendless experience and has been essential for our tiny dev team to ship big features like it already happened. It is the perfect abstraction in front of the endless complexity two-way sync normally entails. Just write your data to IndexedDB with Dexie's best-in-class API. It'll show up where it's supposed to. Nothing could be simpler."</p>
-              <p class="quote-author small">- Dusty Phillips, founder of Fablehenge</p>
-              <!-- <p class="quote">"Dexie Cloud opens doors to a world of possibilities and makes me look forward to every step of our journey, including multiple apps, prototypes, and client projects."</p> 
-              <p class="quote-author small">- Bennie Forss, Zenta AB</p>-->
-
-              <p style="font-size: 20px;">
-                <a href="https://buy.stripe.com/14k9CEgSne5D1BS8ww">Buy now &raquo;</a>
-              </p>
-            </div>
-            <!-- </div>
-          </div> -->
-        </div>
-      </div>
-    </div>
+<ul>
+  <li><a href="https://github.com/dexie/Dexie.js/issues/508">Database opening hangs in Safari 10.1</a>. <a href="https://bugs.webkit.org/show_bug.cgi?id=171049">Reported to bugs.webkit.org</a></li>
+  <li><a href="https://github.com/dexie/Dexie.js/issues/559">Crash when using with fastClickjs</a></li>
+  <li>Solved: <a href="https://github.com/dexie/Dexie.js/issues/565">Crash issue with getAll() on Safari 10.1</a>. Worked around in Dexie and solved in Safari 11.</li>
+  <li><a href="https://github.com/dexie/Dexie.js/issues/585">Safari and CryptoKeys</a></li>
+  <li>WORKED AROUND IN DEXIE 3.0: <a href="https://github.com/dexie/Dexie.js/issues/594">Safari + where + modify = only one updated</a></li>
+  <li><a href="https://github.com/dexie/Dexie.js/issues/616">Safari Upgrade issue: Can’t create Dexie database in Safari 11.0.1 (11604.3.5.1.1)</a></li>
+  <li><a href="https://github.com/dexie/Dexie.js/issues/618">Safari 11 add blob becomes null</a></li>
+  <li>MAJOR: <a href="https://github.com/dexie/Dexie.js/issues/656">Safari save Uint8Array in DB</a></li>
+  <li><a href="https://github.com/dexie/Dexie.js/issues/668">Crashed Page on Safari</a></li>
+</ul>
 
 
     </main>

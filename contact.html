@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Dexie.js - Minimalistic IndexedDB Wrapper</title>
+		<meta charset='utf-8'>
+		<meta http-equiv='X-UA-Compatible' content='IE=edge'>
+		<meta name='viewport' content='width=device-width, initial-scale=1'>
+		<meta name='description' content='The easiest way to use IndexedDB. A lightweight, minimalistic wrapper that provides a straightforward API for developers using IndexedDB.'>
+		<meta name='google-site-verification' content='bFdw7dX5NwJCo_bf9zjRqrunuZ6aHBpIEpBX3oy3ItM'/>
+		<link href='/assets/css/bootstrap.min.css' rel='stylesheet'>
+		<link href='/assets/css/prism-vscode-dark.css' rel='stylesheet'>
+		<link href='/assets/css/stylesheet.css' rel='stylesheet'>
+		<link rel="shortcut icon" href="/assets/images/favicon-yuri.png" />
+		<script src="/assets/js/lazyload.min.js"></script>
+		<script src="/assets/js/offline-switch.js"></script>
+		<script src='/assets/js/prism-highlight.js'></script>
+	</head>
+	<body class='language-javascript'>
+
+		<nav class="navbar navbar-default" style="z-index: 10;">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <!-- <a class="navbar-brand" href="/" style="background-image: url('/assets/images/dexie-logo-icon-menu-dark-bkgimg.svg'); background-repeat: no-repeat; background-position: 7px 8px;">Dexie.js</a> -->
+      <a class="navbar-brand" href="/stop-the-war" style="white-space: nowrap;"><img alt="Support Ukraine!" src="/assets/images/ukraine-flag.png" style="
+        float: left;
+        height: 16px;
+        width: 16px;
+        margin: 2px 4px 0 0;
+    "> </a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li><a href="/"><img alt="" src="/assets/images/dexie-logo-icon-menu-dark-img.svg" class="dexie-logo-icon-menu" />Dexie.js</a></li>
+        <li><a href="/cloud/"><img alt="" src="/assets/images/dexie-logo-icon-menu-dark-img.svg" class="dexie-logo-icon-menu" />Dexie Cloud</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Docs <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="/docs/Tutorial/Getting-started">Getting Started</a></li>
+            <li><a href="/docs/Samples">Dexie.js Samples</a></li>
+            <li><a href="/docs/">Dexie.js Docs</a></li>
+            <li><a href="/docs/API-Reference#quick-reference">Dexie.js Cheat Sheet</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="/cloud/docs/">Dexie Cloud Docs</a></li>
+            <li><a href="/cloud/docs/cli">Dexie Cloud CLI</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Support <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="http://stackoverflow.com/questions/tagged/dexie">Dexie Questions on StackOverflow</a></li>
+            <li><a href="https://github.com/dexie/Dexie.js/issues?utf8=%E2%9C%93&q=is%3Aissue%20label%3Aquestion">Questions on GitHub</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="http://stackoverflow.com/questions/ask?tags=dexie">Ask Dexie question on Stackoverflow (best chance for a reply)</a></li>
+            <li><a href="https://github.com/dexie/Dexie.js/issues/new?labels=cloud,question">Ask Dexie Cloud question on GitHub</a></li>
+            <li><a href="https://github.com/dexie/Dexie.js/issues/new">File a GitHub issue on Dexie.js</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="/contact#private-support-issues">Private support</a></li>
+            <li><a href="https://betteruptime.com/report/ArgfwoqUmwYQCdwYWHRUDkdc">Report issue with Dexie Cloud service</a></li>
+            <li><a href="https://www.dexie-cloud-status.com" target="dexie-cloud-status">Dexie Cloud Status</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="/contact">Contact</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Who uses Dexie? <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a target="_blank" href="https://www.whatsapp.com/"><img class="icon" src="/assets/images/whatsapp.png"> WhatsApp</a></li>
+            <li><a target="_blank" href="https://totodo.app/"><img class="icon" src="/assets/images/totodo.ico"> To To-Do - AI Integrated Life Organizer</a></li>
+            <li><a target="_blank" href="https://todo.microsoft.com/"><img class="icon" src="/assets/images/microsoft-todo.ico"> Microsoft To Do</a></li>
+            <li><a target="_blank" href="https://desktop.github.com/"><img class="icon" src="/assets/images/github-desktop-icon.svg" > GitHub Desktop</a></li>
+            <li><a target="_blank" href="https://www.flightradar24.com/"><img class="icon" src="/assets/images/flightradar24.svg"> Flightradar24 - real-time flight info</a></li>
+            <li><a target="_blank" href="https://www.loom.com/"><img class="icon" src="/assets/images/loom.ico"> Loom - Video messaging</a></li>
+            <li><a target="_blank" href="https://wire.com/"><img class="icon" src="/assets/images/wire-icon.ico"> Wire - An end-to-end encrypted chat application</a></li>
+            <li><a target="_blank" href="https://github.com/dexie/Dexie.js/network/dependents?package_id=UGFja2FnZS0xMzg0ODIyOQ%3D%3D">... more than 20,000 repos on GitHub</a></li>
+          </ul>
+        </li>
+        <li><a href="/contact">Contact </a></li>
+        
+        <li><a href="https://github.com/dexie/Dexie.js/releases">Releases </a></li>
+        <li><a href="/roadmap/">Road Map</a></li>
+        <li><a href="https://medium.com/dexie-js" target="dexie-blog">Blog </a></li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+
+    <div id="offline-switch">
+  <span id="offline-switch-enabled" style="display:none;" title="Make Dexie documentation available offline">
+    <span id="offlineOffHeading">Make offline</span>
+    <span id="offlineOnHeading">Available offline</span>
+    <label class="switch">
+      <input
+        id="offline-checkbox"
+    aria-labelledby="offlineOffHeading"
+        type="checkbox"
+        onchange="setOffline(event.target.checked)"
+      />
+      <span class="slider round"></span>
+    </label>
+  </span>
+  <img id="cookie-settings-icon"
+    src="/assets/images/cookie-32.png"
+    style="margin-left: 8px; width:24px;height: 24px;margin-top: -4px; cursor:pointer; display: none;"
+    alt="Cookie settings"
+    title="Cookie settings"
+    onclick="glowCookies.openSelector();"
+  />
+  <!-- <script>
+    updateSwitchFromStorage();
+  </script> -->
+</div>
+
+    
+  </div><!-- /.container-fluid -->
+</nav>		
+<script>
+    document.querySelectorAll('nav.navbar ul>li>a').forEach(function (a) {
+      var href = a.getAttribute('href');
+      href = href && href.split('#')[0];
+      if (href && location.pathname === href) {
+        //console.log("Selected: ", a.href);
+        a.closest('li').className += ' active';
+      }
+    });
+</script>
+
+		<div class='jumbotron' id='parallax'>
+			<div class='parallax-wrap'>
+				<div class='layer' data-depth='.3'>
+					<img src='/assets/images/bg.png'/>
+				</div>
+			</div>
+			<!-- Github star button -->
+<div id="star-button">
+  <!-- Place this tag where you want the button to render. -->
+  <a class="github-button" href="https://github.com/dexie/Dexie.js" data-size="large" data-show-count="true" aria-label="Star dfahlander/Dexie.js on GitHub">Star</a>
+</div>
+<!-- Place this tag in your head or just before your close body tag. -->
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+
+			<div class='container'>
+				<img src="assets/images/dexie-logo-icon.svg" class="dexie-logo-icon" />
+				<h1>Dexie.js</h1>
+				<p>A Minimalistic Wrapper for IndexedDB</p>
+				<span class='size-details'>( only ~25k minified and gzipped )</span>
+				<div style="display: inline-flex;">
+					<div style="flex: 1; padding: 0 2px 0 0;">
+						<a class='getstarted btn btn-primary btn-lg' href='/docs/Tutorial/Getting-started' role='button'>
+							<span class='glyphicon glyphicon-flash'></span>
+							<span class='widescreen'>Getting started</span>
+							<span class='slimscreen'>Get started</span>
+						</a>
+						<a class='getstarted btn btn-success btn-lg' href='#sync' role='button'>
+							<span class='glyphicon glyphicon-flash'></span>
+							<span class='widescreen'>Getting started with Sync</span>
+							<span class='slimscreen'>Add Sync</span>
+						</a>
+					</div>
+			</div>
+				<br/>
+				<div style="padding-top: 18px; "></div>
+					<a style="color: white; font-style: italic; opacity: 0.8;" href='https://jsfiddle.net/dfahlander/3tf5r0cu'>
+						<span class='glyphicon glyphicon-edit'></span>
+						<span>Play in JSFiddle</span>
+					</a>
+					
+<!-- <div id="current-announcement" style="font-size: 14pt; padding-top: 4px; /*position: absolute; top: 50px; right: 50px;*/">
+  <a href="/announcements/2024-03-27" style="color: white; text-decoration: underline;">Announcement: Dexie Cloud is now publicly released!</a>💥 
+</div>-->
+
+
+				</div>
+				<!-- <a href="/cloud/" id="cloud-promoter">
+					<div class="shoutouts">
+						<p>Need sync?</p>
+						<p>Create collaborative offline-first apps</p>
+						<p>Easy to get started</p>
+					</div>
+					<p>Coming soon: Dexie Cloud<span class="beta">BETA</span><span style="display: inline-block; margin-left: -1em;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&raquo;</span></p>
+				</a> -->
+			</div>
+		</div>
+
+		<div class='container'>
+
+  <h1 id="contact">Contact</h1>
+
+<p>We love to answer all kinds of questions about Dexie.js on stackoverflow and we try do our best to be fast to respond to and fix issues posted on Github! Never hesitate to ask something on <a href="http://stackoverflow.com/questions/ask?tags=dexie">stackoverflow</a>. Also, please <a href="https://github.com/dexie/Dexie.js/issues/new">file issues</a> when you suspect a bug, but please do a bit of research before you do: <a href="https://github.com/dexie/Dexie.js/issues?q=is%3Aissue">search for existing issues</a>.</p>
+
+<h2 id="sales">Sales</h2>
+
+<p>You are more than welcome to contact us on email or even to directly here and now, schedule a sales meeting with us, see links below:</p>
+
+<p>Email: <a href="mailto:sales@awarica.com">sales@awarica.com</a></p>
+
+<p>
+  Schedule a meeting: 
+  <!-- Calendly link widget begin -->
+  <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet" />
+  <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async=""></script>
+  <a href="" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/david-fahlander-awarica/30min'});return false;">Check available time slots</a>
+  <!-- Calendly link widget end -->
+</p>
+
+<h2 id="ask-question">Ask Question</h2>
+
+<p><a href="http://stackoverflow.com/questions/ask?tags=dexie">Ask Dexie question on stackoverflow</a></p>
+
+<p><a href="https://github.com/dexie/Dexie.js/issues/new?labels=cloud,question">Ask Dexie Cloud question on GitHub</a></p>
+
+<p><a href="https://account.wire.com/conversation-join/?key=earNGQtQbLegPGpz8jAX&amp;code=t8lYpyUrpgFyp53w3vvE&amp;domain=wire.com">Chat with us</a></p>
+
+<h2 id="file-issue">File Issue</h2>
+
+<p>Before you file an issue, please Google your problem first - chances are you find hints or answers in an existing stackoverflow-, GitHub, docs page or some blog. Also <a href="https://github.com/dexie/Dexie.js/issues?q=is%3Aissue">search for existing issues</a>.</p>
+
+<p><a href="https://github.com/dexie/Dexie.js/issues/new">File a Dexie issue</a></p>
+
+<p><a href="https://github.com/dexie/Dexie.js/issues/new?labels=cloud">File a Dexie Cloud issue</a></p>
+
+<h2 id="private-support-issues">Private support issues</h2>
+
+<p>To request private support, send an email to <a href="mailto:privsupport@dexie.org">privsupport@dexie.org</a>:</p>
+
+<ul>
+  <li>Email address: <a href="mailto:privsupport@dexie.org">privsupport@dexie.org</a></li>
+  <li>Cost: €150/h</li>
+  <li>We will be asking you to place an order of 10 hours at minimum.</li>
+  <li>
+    <p>In the email, please provide your details:</p>
+
+    <p><em>Your Name</em></p>
+
+    <p><em>Company Name</em></p>
+
+    <p><em>Company Address</em></p>
+
+    <p><em>Country</em></p>
+
+    <p><em>VAT number (if EU)</em></p>
+
+    <p><em>Contact information</em></p>
+  </li>
+</ul>
+
+<h2 id="business-related-questions">Business related questions</h2>
+
+<p>Businesses around Dexie.js and Dexie Cloud is managed by Awarica AB, a Swedish company located in Stockholm.</p>
+
+<p>If you have business related questions, or want to get in touch on non-technical issues:</p>
+
+<p><a href="mailto:business@dexie.org">business@dexie.org</a></p>
+
+<h1 id="author-and-contributors">Author and contributors</h1>
+
+<p>David Fahlander</p>
+
+<ul>
+  <li><a href="https://github.com/dfahlander">Github »</a></li>
+  <li><a href="https://medium.com/@dfahlander">Medium »</a></li>
+  <li><a href="https://twitter.com/dfahlander">Twitter »</a></li>
+</ul>
+
+<p>Other contributors</p>
+
+<ul>
+  <li><a href="https://github.com/acicali">Aaron Cicali »</a></li>
+  <li><a href="https://poniros.de">Nikolas Poniros »</a></li>
+  <li><a href="https://github.com/chrahunt">Christopher Hunt »</a></li>
+  <li><a href="https://github.com/dexie/Dexie.js/graphs/contributors">And a bunch more »</a></li>
+</ul>
+
+
+</div>
+
+
+		<div class='container'>
+			<footer>
+				<p style="font-size:21px; color:black; ">Browser testing via <a href="https://www.lambdatest.com/" target="_blank"><img src="https://www.lambdatest.com/support/img/logo.svg" style="vertical-align: middle;margin-left:5px" width="147" height="26" /></a></p>
+				<br/>
+				<p>&copy; 2014-2024 Dexie.js is the creation of David Fahlander and managed by Awarica AB.</p>
+			</footer>
+		</div>
+
+		<script src='/assets/js/jquery.min.js'></script>
+		<script src='/assets/js/bootstrap.min.js'></script>
+		<script src='/assets/js/prism-2020.js'></script>
+		<script src='/assets/js/prism-svelte.js'></script>
+		<script src='/assets/js/parallax.min.js'></script>
+    <script src="/assets/js/anime.min.js"></script>
+    <script src="/assets/js/shoutouts.js"></script>
+		<script>
+			new Parallax(document.getElementById('parallax'));
+			var lazyLoadInstance = new LazyLoad({});
+			document.addEventListener("DOMContentLoaded", prismHighlight.highlight);
+		</script>
+		<script src="/assets/js/scroll-to-anchor.js"></script>
+		<script src="https://cdn.jsdelivr.net/gh/manucaralmo/GlowCookies@3.1.8/src/glowCookies.min.js"></script>
+<script>
+  document.getElementById('cookie-settings-icon').style.display = localStorage.getItem('GlowCookies') == "1" ? 'none' : '';
+  glowCookies.start('en', {
+      style: 1,
+      analytics: 'G-7W0YET4Q10',
+      hideAfterClick: true,
+      policyLink: 'https://dexie.org/privacy',
+      customScript: [{ type: 'custom', position: 'body', content: "updateSwitchFromStorage();" }]
+  });
+</script>
+<!--
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7W0YET4Q10"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7W0YET4Q10');
+</script>
+-->
+
+
+		<script async defer src='//unpkg.com/dexie'></script>
+	</body>
+</html>

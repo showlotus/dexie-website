@@ -1,0 +1,2450 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>
+    Consistency in Dexie Cloud
+  </title>
+  <meta
+    name="description"
+    content="The easiest way to use IndexedDB. A lightweight, minimalistic wrapper that provides a straightforward API for developers using IndexedDB."
+  />
+
+  <link href="/assets/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="/assets/css/prism-vscode-dark.css" rel="stylesheet" />
+  <link href="/assets/css/stylesheet.css" rel="stylesheet" />
+  <link href="/assets/css/docs.css" rel="stylesheet" />
+  <link href="/assets/css/font-awesome.min.css" rel="stylesheet" />
+  <link rel="shortcut icon" href="/assets/images/favicon-yuri.png" />
+  <script src="/assets/js/offline-switch.js"></script>
+  <script src="/assets/js/prism-highlight.js"></script>
+  <script src="/assets/js/ukraine2.js"></script>
+</head>
+
+
+  <body>
+    <nav class="navbar navbar-default" style="z-index: 10;">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <!-- <a class="navbar-brand" href="/" style="background-image: url('/assets/images/dexie-logo-icon-menu-dark-bkgimg.svg'); background-repeat: no-repeat; background-position: 7px 8px;">Dexie.js</a> -->
+      <a class="navbar-brand" href="/stop-the-war" style="white-space: nowrap;"><img alt="Support Ukraine!" src="/assets/images/ukraine-flag.png" style="
+        float: left;
+        height: 16px;
+        width: 16px;
+        margin: 2px 4px 0 0;
+    "> </a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li><a href="/"><img alt="" src="/assets/images/dexie-logo-icon-menu-dark-img.svg" class="dexie-logo-icon-menu" />Dexie.js</a></li>
+        <li><a href="/cloud/"><img alt="" src="/assets/images/dexie-logo-icon-menu-dark-img.svg" class="dexie-logo-icon-menu" />Dexie Cloud</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Docs <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="/docs/Tutorial/Getting-started">Getting Started</a></li>
+            <li><a href="/docs/Samples">Dexie.js Samples</a></li>
+            <li><a href="/docs/">Dexie.js Docs</a></li>
+            <li><a href="/docs/API-Reference#quick-reference">Dexie.js Cheat Sheet</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="/cloud/docs/">Dexie Cloud Docs</a></li>
+            <li><a href="/cloud/docs/cli">Dexie Cloud CLI</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Support <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="http://stackoverflow.com/questions/tagged/dexie">Dexie Questions on StackOverflow</a></li>
+            <li><a href="https://github.com/dexie/Dexie.js/issues?utf8=%E2%9C%93&q=is%3Aissue%20label%3Aquestion">Questions on GitHub</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="http://stackoverflow.com/questions/ask?tags=dexie">Ask Dexie question on Stackoverflow (best chance for a reply)</a></li>
+            <li><a href="https://github.com/dexie/Dexie.js/issues/new?labels=cloud,question">Ask Dexie Cloud question on GitHub</a></li>
+            <li><a href="https://github.com/dexie/Dexie.js/issues/new">File a GitHub issue on Dexie.js</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="/contact#private-support-issues">Private support</a></li>
+            <li><a href="https://betteruptime.com/report/ArgfwoqUmwYQCdwYWHRUDkdc">Report issue with Dexie Cloud service</a></li>
+            <li><a href="https://www.dexie-cloud-status.com" target="dexie-cloud-status">Dexie Cloud Status</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="/contact">Contact</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Who uses Dexie? <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a target="_blank" href="https://www.whatsapp.com/"><img class="icon" src="/assets/images/whatsapp.png"> WhatsApp</a></li>
+            <li><a target="_blank" href="https://totodo.app/"><img class="icon" src="/assets/images/totodo.ico"> To To-Do - AI Integrated Life Organizer</a></li>
+            <li><a target="_blank" href="https://todo.microsoft.com/"><img class="icon" src="/assets/images/microsoft-todo.ico"> Microsoft To Do</a></li>
+            <li><a target="_blank" href="https://desktop.github.com/"><img class="icon" src="/assets/images/github-desktop-icon.svg" > GitHub Desktop</a></li>
+            <li><a target="_blank" href="https://www.flightradar24.com/"><img class="icon" src="/assets/images/flightradar24.svg"> Flightradar24 - real-time flight info</a></li>
+            <li><a target="_blank" href="https://www.loom.com/"><img class="icon" src="/assets/images/loom.ico"> Loom - Video messaging</a></li>
+            <li><a target="_blank" href="https://wire.com/"><img class="icon" src="/assets/images/wire-icon.ico"> Wire - An end-to-end encrypted chat application</a></li>
+            <li><a target="_blank" href="https://github.com/dexie/Dexie.js/network/dependents?package_id=UGFja2FnZS0xMzg0ODIyOQ%3D%3D">... more than 20,000 repos on GitHub</a></li>
+          </ul>
+        </li>
+        <li><a href="/contact">Contact </a></li>
+        
+          <li class=""><a href="/cloud/pricing">Pricing </a></li>
+        
+        <li><a href="https://github.com/dexie/Dexie.js/releases">Releases </a></li>
+        <li><a href="/roadmap/">Road Map</a></li>
+        <li><a href="https://medium.com/dexie-js" target="dexie-blog">Blog </a></li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+
+    <div id="offline-switch">
+  <span id="offline-switch-enabled" style="display:none;" title="Make Dexie documentation available offline">
+    <span id="offlineOffHeading">Make offline</span>
+    <span id="offlineOnHeading">Available offline</span>
+    <label class="switch">
+      <input
+        id="offline-checkbox"
+    aria-labelledby="offlineOffHeading"
+        type="checkbox"
+        onchange="setOffline(event.target.checked)"
+      />
+      <span class="slider round"></span>
+    </label>
+  </span>
+  <img id="cookie-settings-icon"
+    src="/assets/images/cookie-32.png"
+    style="margin-left: 8px; width:24px;height: 24px;margin-top: -4px; cursor:pointer; display: none;"
+    alt="Cookie settings"
+    title="Cookie settings"
+    onclick="glowCookies.openSelector();"
+  />
+  <!-- <script>
+    updateSwitchFromStorage();
+  </script> -->
+</div>
+
+    
+  </div><!-- /.container-fluid -->
+</nav>		
+<script>
+    document.querySelectorAll('nav.navbar ul>li>a').forEach(function (a) {
+      var href = a.getAttribute('href');
+      href = href && href.split('#')[0];
+      if (href && location.pathname === href) {
+        //console.log("Selected: ", a.href);
+        a.closest('li').className += ' active';
+      }
+    });
+</script> <header class="site-header">
+  <div class="jumbotron docs-page-jumbotron dexie-cloud-docs">
+    <div class="container">
+      <img src="/assets/images/dexie-logo-icon.svg" class="dexie-logo-icon" />
+      <h1><a href="/cloud/">Dexie Cloud Docs</a></h1>
+      <p>A sync service for Dexie.js</p>
+      
+<!-- <div id="current-announcement" style="font-size: 14pt; padding-top: 4px; /*position: absolute; top: 50px; right: 50px;*/">
+  <a href="/announcements/2024-03-27" style="color: white; text-decoration: underline;">Announcement: Dexie Cloud is now publicly released!</a>💥 
+</div>-->
+
+
+      <!-- <style>
+  .coming-soon-badge {
+    position: fixed;
+    top: 0px;
+    right: 0;
+    width: 550px;
+    background-color: rgba(226, 221, 235, 1);
+    opacity: 0.20;
+    color: #0f0329;
+    transform-origin: 50% 50%;
+    transform: rotate(45deg) translate(205px, -70px);
+    overflow: hidden;
+    text-align: center;
+    font-size: 16pt;
+    font-family: monospace;
+    font-style: bold;
+    pointer-events: none;
+    z-index: 2;
+  }
+  @media screen and (min-width: 768px) {
+    .coming-soon-badge {
+      opacity: 0.20;
+      font-size: 28pt;
+      transform: rotate(45deg) translate(160px, 0px);
+    }
+  }
+</style>
+<div class="coming-soon-badge coming-soon-big">Coming Soon</div>
+ -->
+    </div>
+  </div>
+</header>
+
+
+    <main class="container">
+      <div class="row">
+        <div class="col-xs-12 col-md-8">
+          <div class="row docs-page">
+            <div class="col-xs-12">
+              <h1 class="col-xs-12 col-md-9" style="padding: 0; margin: 0">
+                Consistency in Dexie Cloud
+              </h1>
+              <div class="hidden-xs col-md-3">
+                <a
+                  class="btn btn-primary btn-edit-doc-page"
+                  href="https://github.com/dfahlander/dexie.js-web/edit/gh-pages/cloud/docs/consistency.md"
+                >
+                  <span class="glyphicon glyphicon-edit"></span>&nbsp; Edit on
+                  GitHub
+                </a>
+              </div>
+            </div>
+          </div>
+          <hr />
+          <div class="row">
+            <div class="col-xs-12"><p>This page describes the concepts that Dexie Cloud use in order to guarantee consistency in the synchronized offline-first database. Offline clients may share the same subset of data - and perform operations that may yield one direct result on the offline database, but would have yielded another result after a sync where updated data from another client would make the original operation yield another result. Consistent add-, modify-, put- and delete operations are core concepts of Dexie Cloud and makes sure to not just sync individual objects but also the conditions used in the operations, so that the same operations can be re-executed on updated data to guarantee the same consistency at all times.</p>
+
+<p>If you are new to Dexie Cloud, please visit the <a href="/cloud/">Dexie Cloud landing page</a>.</p>
+
+<p>If you prefer to jump right in to samples, here some shortcuts:</p>
+
+<ul>
+  <li><a href="https://github.com/dexie/Dexie.js/blob/v4.0.0-alpha.3/samples/dexie-cloud-todo-app/src/db/TodoList.ts#L144-L149">Consistently delete own access to a todo-list</a></li>
+  <li><a href="https://github.com/dexie/Dexie.js/blob/v4.0.0-alpha.3/samples/dexie-cloud-todo-app/src/db/TodoList.ts#L151-L172">Consistently delete a shared todo-list along with its todo items</a></li>
+  <li><a href="https://github.com/dexie/Dexie.js/blob/v4.0.0-alpha.3/samples/dexie-cloud-todo-app/src/db/TodoList.ts#L30-L32">Consistently detect whether a todo-list is shared or not</a></li>
+  <li><a href="https://github.com/dexie/Dexie.js/blob/v4.0.0-alpha.3/samples/dexie-cloud-todo-app/src/db/TodoList.ts#L38-L72">Consistently make a todo-list sharable and create a realm for its sharing</a></li>
+</ul>
+
+<h1 id="introduction">Introduction</h1>
+
+<p>It can be a challenge to keep consistency in synced offline-first applications. You are working with data that is being copied across multiple devices - some of which might be offline while you perform an operation. Or you might be offline while you perform an operation that needs to be performed in a way that keeps the data 100% consistent at any point in time - and will be kept consistent after next sync - no matter what operations that have taken place by other users.</p>
+
+<p>Dexie Cloud uses a combination of concepts that the application programmer can utilize in order to keep the data totally consistent at all times.</p>
+
+<h1 id="designing-a-consistency-friendly-model">Designing a Consistency-friendly model</h1>
+
+<p>If you work with Dexie Cloud, it is important to avoid storing objects in array properties if the array needs to be manipulated frequently by multiple clients. It is much better to use a relational model and let every type map to a table, and let collections belonging to an entity be represented in as its own database object, with its own ID and with a reference-property acting as a foreign key to the owning object (a traditional one-to-many relationship in relational databases). Many-to-many relations are best represented using an <a href="https://en.wikipedia.org/wiki/Associative_entity">associative entity</a> for the same reason. By using a relational approach, these collections may be managed in a consistent manner also by offline clients and conflicts can be avoided using consistent modify- and delete operations as described later on this page.</p>
+
+<h1 id="consistency-concepts-in-dexie-cloud">Consistency Concepts in Dexie Cloud</h1>
+
+<p>The concepts being used in Dexie Cloud to keep data consistent, are:</p>
+
+<ul>
+  <li>Globally Unique IDs</li>
+  <li>Atomic Transactions</li>
+  <li>Canonical Server Data Snapshot</li>
+  <li>Consistent Modify- and Delete Operations</li>
+  <li>Consistently add or remove unique entries to sets of strings or numbers</li>
+  <li>Consistent addition / subtraction</li>
+  <li>Consistent hierarchial tree structures</li>
+  <li>Tied Realms</li>
+  <li>Update Operations</li>
+  <li>Private Singleton IDs</li>
+</ul>
+
+<h2 id="globally-unique-ids">Globally Unique IDs</h2>
+
+<p>In contrast to auto-incremented numbers or short strings, globally unique IDs have the constraint that it virtually impossible to that two generated IDs are equal. That constraint make them avoid any conflict for add (insert) operations that occurs on different offline clients.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CLIENT A adds object with ID "AaIHn9smowhaFixqlcb7C4u"
+CLIENT B adds object with ID "BbIXypXaau8MefAQPb77ivL"
+CLIENT A syncs with server --&gt; "AaIHn9smowhaFixqlcb7C4u" is inserted on server
+CLIENT B syncs with server --&gt; "BbIXypXaau8MefAQPb77ivL" is inserted on server. "AaIHn9smowhaFixqlcb7C4u" is retrieved back to CLIENT B.
+CLIENT A pulls from server --&gt; "BbIXypXaau8MefAQPb77ivL" is retrieved back to CLIENT A.
+</code></pre></div></div>
+
+<p>Note however, that <a href="https://en.wikipedia.org/wiki/Associative_entity">associative entities</a> shall not have their own global ID but instead build up its primary key using the combination of the keys it refer to, using a <a href="/docs/Compound-Index#compound-primary-key">compound primary key</a>.</p>
+
+<h2 id="atomic-transactions">Atomic Transactions</h2>
+
+<p>Any Dexie transaction will be regarded as an atomic all-or-nothing operation when it syncs to the cloud. If any of the involving operations fail to execute on the server for authorization reasons or any other reason, to other operations of the transaction be applied either and the server will send back a list of resulting operations that will make the client roll-back the operation.</p>
+
+<h2 id="canonical-server-data-snapshot">Canonical Server Data Snapshot</h2>
+
+<p>The protocol used when syncing between Dexie Cloud client and server assures that in the end of the sync, the client will have an identical snapshot of the data on the server (but just a subset of the database according to user’s realm memberships). The algorithm for this can be described as so:</p>
+
+<ol>
+  <li>Client sends all mutated objects along with their primary keys. Client also provides a revision pointing out the server data snapshot from the last sync. The logical outcome of this, is that all non-provided keys are for sure unchanged.</li>
+  <li>Operations are executed on the server data</li>
+  <li>When done, server should virtually send back the entire data snapshot to assure the canonical server data snapshot at this point. However, since we know what keys the client has changed, and what keys the server has changed, we know that these objects and only these objects needs to be sent back to the client in order to fulfill this promise.</li>
+  <li>Before sending back all objects that have been changed by the server or client, the server will first further compute which parts of the objects (properties) that will actually have to be sent back - ignoring all properties that would be the same value anyway.</li>
+</ol>
+
+<h2 id="consistent-modify--and-delete-operations">Consistent Modify- and Delete Operations</h2>
+
+<p>Dexie Cloud can guarantee consistency within a graph of related entities so that two offline clients manipulating it in various ways end up in a consistent state that comply with the where-clause of the modify or delete operation.</p>
+
+<p>If <a href="/docs/Collection/Collection.modify()">Collection.modify()</a> or <a href="/docs/Collection/Collection.delete()">Collection.delete()</a> is used on a collection filtered by a certain where-expression, the expression will be a part of the operation and be re-executed on the server snapshot to ensure consistency of the intension of the operation.</p>
+
+<p>For example, let’s say you want to modify all ToDo-items within a certain Todo-list to <code class="language-plaintext highlighter-rouge">{done: true}</code>:</p>
+
+<div class="language-ts highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">await</span> <span class="nx">db</span><span class="p">.</span><span class="nx">todoItems</span><span class="p">.</span><span class="nx">where</span><span class="p">({</span> <span class="na">todoListId</span><span class="p">:</span> <span class="nx">todoListId</span> <span class="p">}).</span><span class="nx">modify</span><span class="p">({</span> <span class="na">done</span><span class="p">:</span> <span class="kc">true</span> <span class="p">})</span>
+</code></pre></div></div>
+
+<p>The intension here is to set all todo-items to done for the entire list. The intension is articulated using a where-clause and we’ll describe below how this intention will affect the sync operation to maintain the intended consistency.</p>
+
+<h3 id="offline-consistency">Offline consistency</h3>
+
+<p>Given our previous operation to set all todoItems’ <code class="language-plaintext highlighter-rouge">done</code> to <code class="language-plaintext highlighter-rouge">true</code> for a certain todoList; what if you were offline when you made the operation, and your client is not aware of some additional todo-items that has been added during your offline period? When the sync takes place, the where-expression will execute on the server data and if other items had been added to the list, they will also be updated. And items that had been removed from the list would not be affected by the operation (a roll-back will happen for these as if they were never affected by the operation).</p>
+
+<p>Example:</p>
+
+<ol>
+  <li>You commit the transaction locally while offline. It affects Todo-item A, B and C (which is the current items in the list on your offline copy and on the server as well).</li>
+  <li>Another online client adds a new Todo-item D to the list and removes Todo-item A. It syncs the operation eagerly, so now the server has a list with items B, C and D.</li>
+  <li>Your client goes online and syncs the operation.</li>
+  <li>Server adjust your operation according to changes made after your last sync. It only applies the operation on Todo-items B, C and D but not on A.</li>
+  <li>Server sends back a list of operations that will make the client roll-back Todo-item A with to how it is on the server, as if the operation had not affected Todo-item A. The list of operations also contains an add-operation for Todo-item D with <code class="language-plaintext highlighter-rouge">{done: true}</code> because of the operation has affected Todo-item D due to the where-clause of the operation.</li>
+</ol>
+
+<h3 id="consistency-guarantee-for-future-syncs">Consistency Guarantee for Future Syncs</h3>
+
+<p>Another more advanced trait of this consistency guarantee is the case when there is another client (else than yours) that also mutates its local database in a way that would affect the result of executing your where-clause on the objects they mutate in their operation while being offline. Dexie Cloud guarantees that when that client comes online eventually and syncs, it will have your operation applied consistently onto their not-yet-synced operations, the final outcome of their sync call will stay consistent. For example, if the other client did delete Todo-item B and added a new Todo-item E to your list while it was offline and you synced your operation to mark all todo-items in your list as done (using <a href="/docs/Collection/Collection.modify() with a where-clause">Collection.modify()</a>. When that client goes online again, AFTER your sync was already finished, it will perform your modify operation onto its own modifications before applying them to the server so that Todo-item E also gets the <code class="language-plaintext highlighter-rouge">done</code> property set.</p>
+
+<p>Flow:</p>
+
+<ol>
+  <li>Other client (currently offline) adds new Todo-item E to the list.</li>
+  <li>You sync your consistent operation with the server <code class="language-plaintext highlighter-rouge">db.todoItems.where({todoListId: todoListId}).modify({done: true})</code></li>
+  <li>Other client goes online and sends its changes to the server.</li>
+  <li>
+    <p>Server will apply your modify operation against the other client’s changes before applying them because that client’s last sync happened before your operation was synced, so:</p>
+
+    <ul>
+      <li>The operation to add Todo-item E will be affected by your operation because the where-expression of your modify operation evaluates true.</li>
+      <li>Your modify operation (to set <code class="language-plaintext highlighter-rouge">{done: true}</code> on the item) is applied as a pseudo-operation for the client.</li>
+    </ul>
+  </li>
+  <li>The end result will be that the Todo-list has item B, C, D and E - all with <code class="language-plaintext highlighter-rouge">{done: true}</code> which is fully consistent with the original intention of your operation <code class="language-plaintext highlighter-rouge">db.todoItems.where({todoListId: todoListId}).modify({done: true})</code>.</li>
+</ol>
+
+<p>Basically, where-based modify- and delete-operations persist on the server until all clients have synced, and the operations can evaluate also onto future sync operations from other clients that was not aware of your operation when they did their operations.</p>
+
+<h2 id="update-operations">Update Operations</h2>
+
+<p>Update-operations manipulate individual properties rather than replacing entire objects. Update operations prohibit conflicts when two different clients mutate different properties on the same object. This requires that the dexie operation to update was a <a href="/docs/Table/Table.update()">Table.update()</a> (or <a href="/docs/Collection/Collection.modify()">Collection.modify()</a> with a where-clause using equality comparison on primary key) and that the provided changes was an object that listed the properties to update (not a JS callback). If <a href="/docs/Table/Table.put()">Table.put()</a> however was used instead of <a href="/docs/Table/Table.update()">Table.update()</a>, the intention would be to actually replace the entire object and will therefore overwrite another update or put operation and not allow for two clients updating different props.</p>
+
+<p>Update operations avoid conflicts as long as the different clients updates different properties on the object, but if two different clients update the same property, the latest performed operation will overwrite the previous one. An example would be a Todo item’s <code class="language-plaintext highlighter-rouge">done</code> property. If user A sets <code class="language-plaintext highlighter-rouge">{done: true}</code> on the same object as user B sets <code class="language-plaintext highlighter-rouge">{done: false}</code> the operation that was performed latest in time will be the one that overwrites the other. The timestamp of when the actual operation took place on the client, decides which operation will overwrite the other. This timestamp is adjusted to each client’s time-diff against the server.</p>
+
+<h2 id="consistently-add-or-remove-unique-entries-to-sets-of-strings-or-numbers">Consistently add or remove unique entries to sets of strings or numbers</h2>
+
+<p>Update- and modify operations take an object containing the properties to update. The value to be set can either be a plain value (such as <code class="language-plaintext highlighter-rouge">{name: "Foo"}</code> which will update the “name” property to “Foo”) but can also be a consistent operation on the property such as mathematical add(2) or set manipulation remove([“foo”]). This can be utilized to modify the property relative to its current value. When working with array properties that represent a set of strings or numbers (such as <code class="language-plaintext highlighter-rouge">tags</code> or <code class="language-plaintext highlighter-rouge">hobbies</code>), the consistent operations <code class="language-plaintext highlighter-rouge">add()</code> and <code class="language-plaintext highlighter-rouge">remove()</code> can be used to manipulate the array consistently across sync rather than replacing the whole array. See [/docs/add()] and [/docs/remove()]. This has a meaning when multiple clients eventually syncs with a server.</p>
+
+<h2 id="consistent-addition--subtraction">Consistent addition / subtraction</h2>
+
+<p>Number or BigInt properties can be manipulated using addition or subtraction that is consistent across sync.
+See [/docs/add()] and [/docs/remove()].</p>
+
+<h2 id="consistent-tree-structures">Consistent Tree Structures</h2>
+
+<p>One pattern for managing tree structures in a database is to have an indexed property representing the path to the parent node, such as <code class="language-plaintext highlighter-rouge">parentPath</code>. This makes it efficient to delete or list all descendants in one query without any need of recursion:</p>
+
+<div class="language-ts highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Add new node</span>
+<span class="kd">function</span> <span class="nx">addNode</span><span class="p">(</span><span class="nx">childProps</span><span class="p">,</span> <span class="nx">parentId</span> <span class="o">=</span> <span class="kc">null</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">db</span><span class="p">.</span><span class="nx">transaction</span><span class="p">(</span><span class="dl">'</span><span class="s1">rw</span><span class="dl">'</span><span class="p">,</span> <span class="nx">db</span><span class="p">.</span><span class="nx">treeNodes</span><span class="p">,</span> <span class="k">async</span> <span class="p">()</span><span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="kd">const</span> <span class="nx">parent</span> <span class="o">=</span> <span class="nx">parentId</span> <span class="o">&amp;&amp;</span> <span class="k">await</span> <span class="nx">db</span><span class="p">.</span><span class="nx">treeNodes</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="nx">parentId</span><span class="p">);</span>
+    <span class="k">await</span> <span class="nx">db</span><span class="p">.</span><span class="nx">treeNodes</span><span class="p">.</span><span class="nx">add</span><span class="p">({</span>
+      <span class="p">...</span><span class="nx">childProps</span><span class="p">,</span>
+      <span class="na">parentPath</span><span class="p">:</span> <span class="nx">parent</span>
+        <span class="p">?</span> <span class="s2">`</span><span class="p">${</span><span class="nx">parent</span><span class="p">.</span><span class="nx">parentPath</span><span class="p">}${</span><span class="nx">parent</span><span class="p">.</span><span class="nx">id</span><span class="p">}</span><span class="s2">/`</span>
+        <span class="p">:</span> <span class="dl">''</span> <span class="c1">// If no parent, parentPath will be empty string (added at the root)</span>
+    <span class="p">});</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// List direct children</span>
+<span class="kd">function</span> <span class="nx">listChildren</span><span class="p">(</span><span class="nx">node</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">db</span><span class="p">.</span><span class="nx">treeNodes</span><span class="p">.</span><span class="nx">where</span><span class="p">({</span><span class="na">parentPath</span><span class="p">:</span> <span class="s2">`</span><span class="p">${</span><span class="nx">node</span><span class="p">.</span><span class="nx">parentPath</span><span class="p">}${</span><span class="nx">node</span><span class="p">.</span><span class="nx">id</span><span class="p">}</span><span class="s2">/`</span><span class="p">}).</span><span class="nx">toArray</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="c1">// List all descendants without recursion:</span>
+<span class="kd">function</span> <span class="nx">listAllDescendants</span><span class="p">(</span><span class="nx">node</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">db</span><span class="p">.</span><span class="nx">treeNodes</span><span class="p">.</span><span class="nx">where</span><span class="p">(</span><span class="dl">'</span><span class="s1">parentPath</span><span class="dl">'</span><span class="p">).</span><span class="nx">startsWith</span><span class="p">(</span><span class="s2">`</span><span class="p">${</span><span class="nx">node</span><span class="p">.</span><span class="nx">parentPath</span><span class="p">}${</span><span class="nx">node</span><span class="p">.</span><span class="nx">id</span><span class="p">}</span><span class="s2">/`</span><span class="p">).</span><span class="nx">toArray</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="c1">// Load parent</span>
+<span class="kd">function</span> <span class="nx">loadParent</span><span class="p">(</span><span class="nx">node</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">db</span><span class="p">.</span><span class="nx">treeNodes</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="nx">node</span><span class="p">.</span><span class="nx">parentPath</span><span class="p">.</span><span class="nx">split</span><span class="p">(</span><span class="dl">'</span><span class="s1">/</span><span class="dl">'</span><span class="p">).</span><span class="nx">at</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">));</span>
+<span class="p">}</span>
+
+<span class="c1">// Load all ancestors</span>
+<span class="kd">function</span> <span class="k">async</span> <span class="nx">loadAllAncestors</span><span class="p">(</span><span class="nx">node</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">(</span><span class="nx">node</span><span class="p">.</span><span class="nx">parentPath</span>
+    <span class="p">?</span> <span class="k">await</span> <span class="nx">db</span><span class="p">.</span><span class="nx">treeNodes</span><span class="p">.</span><span class="nx">bulkGet</span><span class="p">(</span><span class="nx">node</span><span class="p">.</span><span class="nx">parentPath</span><span class="p">.</span><span class="nx">substring</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nx">node</span><span class="p">.</span><span class="nx">parentPath</span><span class="p">.</span><span class="nx">length</span> <span class="o">-</span> <span class="mi">1</span><span class="p">).</span><span class="nx">split</span><span class="p">(</span><span class="dl">'</span><span class="s1">/</span><span class="dl">'</span><span class="p">))</span>
+    <span class="p">:</span> <span class="p">[]</span>
+  <span class="p">);</span>
+<span class="p">}</span>
+
+<span class="c1">// Delete the node and all its descendants:</span>
+<span class="kd">function</span> <span class="nx">deleteNode</span><span class="p">(</span><span class="nx">node</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">db</span><span class="p">.</span><span class="nx">transaction</span><span class="p">(</span><span class="dl">'</span><span class="s1">rw</span><span class="dl">'</span><span class="p">,</span> <span class="nx">db</span><span class="p">.</span><span class="nx">treeNodes</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="nx">db</span><span class="p">.</span><span class="nx">treeNodes</span><span class="p">.</span><span class="nx">where</span><span class="p">(</span><span class="dl">'</span><span class="s1">parentPath</span><span class="dl">'</span><span class="p">)</span>
+      <span class="p">.</span><span class="nx">startsWith</span><span class="p">(</span><span class="s2">`</span><span class="p">${</span><span class="nx">node</span><span class="p">.</span><span class="nx">parentPath</span><span class="p">}${</span><span class="nx">node</span><span class="p">.</span><span class="nx">id</span><span class="p">}</span><span class="s2">/`</span><span class="p">)</span>
+      <span class="p">.</span><span class="k">delete</span><span class="p">();</span>
+    <span class="nx">db</span><span class="p">.</span><span class="nx">treeNodes</span><span class="p">.</span><span class="nx">where</span><span class="p">({</span>
+      <span class="na">parentPath</span><span class="p">:</span> <span class="nx">node</span><span class="p">.</span><span class="nx">parentPath</span><span class="p">,</span> <span class="c1">// for consistence</span>
+      <span class="na">id</span><span class="p">:</span> <span class="nx">node</span><span class="p">.</span><span class="nx">id</span>
+    <span class="p">}).</span><span class="k">delete</span><span class="p">();</span>
+  <span class="p">});</span>
+<span class="p">}</span>
+
+
+<span class="c1">// Move subtree with sync consistency:</span>
+<span class="k">import</span> <span class="p">{</span> <span class="nx">replacePrefix</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">dexie</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="kd">function</span> <span class="nx">moveNode</span><span class="p">(</span><span class="nx">node</span><span class="p">,</span> <span class="nx">newParentPath</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">db</span><span class="p">.</span><span class="nx">transaction</span><span class="p">(</span><span class="dl">'</span><span class="s1">rw</span><span class="dl">'</span><span class="p">,</span> <span class="nx">db</span><span class="p">.</span><span class="nx">treeNodes</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="c1">// Move node</span>
+    <span class="nx">db</span><span class="p">.</span><span class="nx">treeNodes</span><span class="p">.</span><span class="nx">where</span><span class="p">({</span>
+      <span class="na">parentPath</span><span class="p">:</span> <span class="nx">node</span><span class="p">.</span><span class="nx">parentPath</span><span class="p">,</span> <span class="c1">// consistency-check</span>
+      <span class="na">id</span><span class="p">:</span> <span class="nx">node</span><span class="p">.</span><span class="nx">id</span>
+    <span class="p">}).</span><span class="nx">modify</span><span class="p">({</span>
+      <span class="na">parentPath</span><span class="p">:</span> <span class="nx">newParentPath</span>
+    <span class="p">});</span>
+    <span class="c1">// Move all its descendants in relation to their sub path:</span>
+    <span class="nx">db</span><span class="p">.</span><span class="nx">treeNodes</span>
+      <span class="p">.</span><span class="nx">where</span><span class="p">(</span><span class="dl">'</span><span class="s1">parentPath</span><span class="dl">'</span><span class="p">)</span>
+      <span class="p">.</span><span class="nx">startsWith</span><span class="p">(</span><span class="s2">`</span><span class="p">${</span><span class="nx">node</span><span class="p">.</span><span class="nx">parentPath</span><span class="p">}${</span><span class="nx">node</span><span class="p">.</span><span class="nx">id</span><span class="p">}</span><span class="s2">/`</span><span class="p">)</span>
+      <span class="p">.</span><span class="nx">modify</span><span class="p">({</span>
+        <span class="c1">// Here we're in a declarative object - not a JS callback - ==&gt; Consistent operation.</span>
+        <span class="na">parentPath</span><span class="p">:</span> <span class="nx">replacePrefix</span><span class="p">(</span><span class="nx">node</span><span class="p">.</span><span class="nx">parentPath</span><span class="p">,</span> <span class="nx">newParentPath</span><span class="p">);</span>
+      <span class="p">});</span>
+  <span class="p">});</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>All the mutating operations above are also <a href="https://dexie.org/cloud/docs/consistency#consistent-modify--and-delete-operations">sync consistent</a>: If one offline client adds a child under “/a/b/c” and another offline client modifies all descendants under “/a/b/c” to have a new property {color: “blue”}, the merge of these operation will set {color: “blue”} on the added child also no matter in which order the clients became online.</p>
+
+<h2 id="the-new-support-for-moving-trees">The new support for moving trees</h2>
+
+<p>But modify-operations that use a JS callback does not benefit from sync consistency, only local consistency. Moving an entire tree from one node to another has been one of those operation that need a JS function because the new parentPath’s value depends on its existing value. So a tree move has only been possible with local consistency but not sync consistency before:</p>
+
+<div class="language-ts highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">function</span> <span class="nx">moveNode</span><span class="p">(</span><span class="nx">node</span><span class="p">,</span> <span class="nx">newParentPath</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">db</span><span class="p">.</span><span class="nx">transaction</span><span class="p">(</span><span class="dl">'</span><span class="s1">rw</span><span class="dl">'</span><span class="p">,</span> <span class="nx">db</span><span class="p">.</span><span class="nx">treeNodes</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="c1">// Move node. Having the parentPath criteria here is for consistency:</span>
+    <span class="c1">// Only perform the 2 moves if parentPath is still the same.</span>
+    <span class="nx">db</span><span class="p">.</span><span class="nx">treeNodes</span>
+      <span class="p">.</span><span class="nx">where</span><span class="p">({</span>
+        <span class="na">parentPath</span><span class="p">:</span> <span class="nx">node</span><span class="p">.</span><span class="nx">parentPath</span><span class="p">,</span>
+        <span class="na">id</span><span class="p">:</span> <span class="nx">node</span><span class="p">.</span><span class="nx">id</span><span class="p">,</span>
+      <span class="p">})</span>
+      <span class="p">.</span><span class="nx">modify</span><span class="p">({</span>
+        <span class="na">parentPath</span><span class="p">:</span> <span class="nx">newParentPath</span><span class="p">,</span>
+      <span class="p">})</span>
+    <span class="c1">// Move all its descendants in relation to their sub path:</span>
+    <span class="nx">db</span><span class="p">.</span><span class="nx">treeNodes</span>
+      <span class="p">.</span><span class="nx">where</span><span class="p">(</span><span class="dl">'</span><span class="s1">parentPath</span><span class="dl">'</span><span class="p">)</span>
+      <span class="p">.</span><span class="nx">startsWith</span><span class="p">(</span><span class="s2">`</span><span class="p">${</span><span class="nx">node</span><span class="p">.</span><span class="nx">parentPath</span><span class="p">}${</span><span class="nx">node</span><span class="p">.</span><span class="nx">id</span><span class="p">}</span><span class="s2">/`</span><span class="p">)</span>
+      <span class="p">.</span><span class="nx">modify</span><span class="p">((</span><span class="nx">node</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+        <span class="c1">// This is a JS callback that cannot be expressed to the server</span>
+        <span class="nx">node</span><span class="p">.</span><span class="nx">parentPath</span> <span class="o">=</span>
+          <span class="nx">newParentPath</span> <span class="o">+</span> <span class="nx">node</span><span class="p">.</span><span class="nx">parentPath</span><span class="p">.</span><span class="nx">substring</span><span class="p">(</span><span class="nx">node</span><span class="p">.</span><span class="nx">parentPath</span><span class="p">.</span><span class="nx">length</span><span class="p">)</span>
+      <span class="p">})</span>
+  <span class="p">})</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<p>JS code cannot securely be sent to the server due to several reasons: closures information missing + the risk of sending code that injects arbitrary code on the server. The operation above won’t be sync consistent. If an offline client did add a new node under /a/b/c and that node is moved to /x/y/z, the merging of these operations would not be consistent - a node would still be placed under /a/b/c even though the c node has moved and doesn’t exist anymore. So there is a need for declarative ways of doing certain operations, and moving trees is one of them.</p>
+
+<p>A new export <code class="language-plaintext highlighter-rouge">replacePrefix</code> now available for this purpose. We will add more of these in coming versions (such as increment, push, deleteArrayItem, etc). <code class="language-plaintext highlighter-rouge">replacePrefix</code> is the first “complex” operation that already has support in Dexie Cloud (if upgrading dexie-cloud-addon to 4.0.1-beta.58) and can be executed to perform sync consistent tree moves:</p>
+
+<div class="language-ts highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">replacePrefix</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">dexie</span><span class="dl">'</span><span class="p">;</span>
+
+<span class="c1">// Move subtree with sync consistency:</span>
+<span class="kd">function</span> <span class="nx">moveNode</span><span class="p">(</span><span class="nx">node</span><span class="p">,</span> <span class="nx">newParentPath</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="nx">db</span><span class="p">.</span><span class="nx">transaction</span><span class="p">(</span><span class="dl">'</span><span class="s1">rw</span><span class="dl">'</span><span class="p">,</span> <span class="nx">db</span><span class="p">.</span><span class="nx">treeNodes</span><span class="p">,</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="c1">// Move node</span>
+    <span class="nx">db</span><span class="p">.</span><span class="nx">treeNodes</span><span class="p">.</span><span class="nx">where</span><span class="p">({</span>
+      <span class="na">parentPath</span><span class="p">:</span> <span class="nx">node</span><span class="p">.</span><span class="nx">parentPath</span><span class="p">,</span> <span class="c1">// consistency-check</span>
+      <span class="na">id</span><span class="p">:</span> <span class="nx">node</span><span class="p">.</span><span class="nx">id</span>
+    <span class="p">}).</span><span class="nx">modify</span><span class="p">({</span>
+      <span class="na">parentPath</span><span class="p">:</span> <span class="nx">newParentPath</span>
+    <span class="p">});</span>
+    <span class="c1">// Move all its descendants in relation to their sub path:</span>
+    <span class="nx">db</span><span class="p">.</span><span class="nx">treeNodes</span>
+      <span class="p">.</span><span class="nx">where</span><span class="p">(</span><span class="dl">'</span><span class="s1">parentPath</span><span class="dl">'</span><span class="p">)</span>
+      <span class="p">.</span><span class="nx">startsWith</span><span class="p">(</span><span class="s2">`</span><span class="p">${</span><span class="nx">node</span><span class="p">.</span><span class="nx">parentPath</span><span class="p">}${</span><span class="nx">node</span><span class="p">.</span><span class="nx">id</span><span class="p">}</span><span class="s2">/`</span><span class="p">)</span>
+      <span class="p">.</span><span class="nx">modify</span><span class="p">({</span>
+        <span class="c1">// Here we're in a declarative object - not a JS callback - ==&gt; Consistent operation.</span>
+        <span class="na">parentPath</span><span class="p">:</span> <span class="nx">replacePrefix</span><span class="p">(</span><span class="nx">node</span><span class="p">.</span><span class="nx">parentPath</span><span class="p">,</span> <span class="nx">newParentPath</span><span class="p">);</span>
+      <span class="p">});</span>
+  <span class="p">});</span>
+<span class="p">}</span>
+
+</code></pre></div></div>
+
+<p>This transaction does it all - it moves the node and all its descendants consistently in one atomic all-or-nothing transaction but also preserves the where-condition and the <code class="language-plaintext highlighter-rouge">replacePrefix</code> operation in the information to the server so that if an offline client added a node under /a/b/c, and then this operation happened, moving all descendants to the new location, and then the offline client comes online again and syncs, the new node would be placed on the correct new location and be hanging below a non-existing /a/b/c.</p>
+
+<h3 id="consistency-in-conflicting-move-operations">Consistency in conflicting move operations</h3>
+
+<p>If two operations competes in a move operation involving the same nodes, consistency is maintained by the extra criteria on parentPath in both the move of the parent node and the operation to move its descendants. A move operation will not be performed if another move operation came first. The end result will always be a consistent tree. The last syncer might then experience that the move operation they made got rolled back after a sync and they would instead see the peer’s hierarchy.</p>
+
+<h3 id="remove-unique-item-from-array-property">Remove unique item from array property</h3>
+
+<h2 id="tied-realms">Tied Realms</h2>
+
+<p>Tied realms are for objects that are created as private but may be shared later on.</p>
+
+<p>All database objects in Dexie Cloud have a <code class="language-plaintext highlighter-rouge">realmId</code> property (defaulting to current user’s private realmId). The realmId represents which access-realm an object belongs to. When a realmId is not given for an object, it will default to the built-in private realm for the current user, representing private access. Those objects can be considered private, such as a private todo-list with private todo-items in it. If a private object needs to be shared, you would typically need to create a new realm, add members to the new realm and move the related entities into that new realm by updating their <code class="language-plaintext highlighter-rouge">realmId</code> property.</p>
+
+<p>If we would just create a new realm with a random new ID and move our entities into it, it would work in most scenarios. The problem would arise when two different clients would do this with the same entities while they are both offline (the clients may belong to the same user and therefore have access to the private realm of the user). Another problem occurs when an offline deletes an object without knowing that the object was shared / moved into a new realm, but we didn’t know of this new realm when deleting the object (we were offline when object was shared by another user) so we missed to delete the object’s realm. In the scenario when two offline client both creates a realm for the object (in order to share it), both clients would each create a new realm and when they sync later on, we’d have two realms but only one of the realms would be used while the other would be “empty” and be a ‘hanging object’ that would never be deleted - it would lose it’s relation to the entities it was created to control.</p>
+
+<h3 id="gettiedrealmid">getTiedRealmId()</h3>
+
+<p>The solution to the problem described above is to generate an ID for the realm computed from the ID of the object it should be tied to. This way all offline clients knows the possible ID in case object will be shared, so that it becomes impossible to create multiple realms for the object, and also make sure to always delete any tied realm when deleting the object. Different offline clients would choose the same ID when creating the realm. When they sync later on, the end result would still be a single realm representing the sharing of involved entities. A concrete example: a to-do-list along with its to-do-items. To share the list, you compute realmID from the ToDo-list ID. Then you move the ToDo-list entity along with the ToDo-items to the new realm (by modifying the <code class="language-plaintext highlighter-rouge">realmId</code> property of these objects). Then to share the list with someone, you add a <code class="language-plaintext highlighter-rouge">member</code> entity to the <code class="language-plaintext highlighter-rouge">members</code> table with <code class="language-plaintext highlighter-rouge">realmId</code> set to the new realm ID. So if client A would share it with User A and client B would share it with User B - both of these operations would sync nicely so that both user A and User B would gain access to the todo-list and its items.</p>
+
+<p>And when finally deleting an entity that MAY have a tied realm, application code should also delete the possibly existing realm along with its related entities (todoItems, realm and its members). By doing all these operations within a single Dexie transaction, atomicity is also guaranteed. In the end we have a waterproof and consistent way of managing entire life cycle of entities that may be shared or may be private.</p>
+
+<div class="language-ts highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">import</span> <span class="p">{</span> <span class="nx">getTiedRealmId</span> <span class="p">}</span> <span class="k">from</span> <span class="dl">'</span><span class="s1">dexie-cloud-addon</span><span class="dl">'</span>
+
+<span class="k">async</span> <span class="kd">function</span> <span class="nx">shareList</span><span class="p">(</span><span class="nx">todoList</span><span class="p">:</span> <span class="nx">TodoList</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">await</span> <span class="nx">db</span><span class="p">.</span><span class="nx">transaction</span><span class="p">(</span>
+    <span class="dl">'</span><span class="s1">rw</span><span class="dl">'</span><span class="p">,</span>
+    <span class="p">[</span><span class="nx">db</span><span class="p">.</span><span class="nx">todoLists</span><span class="p">,</span> <span class="nx">db</span><span class="p">.</span><span class="nx">todoItems</span><span class="p">,</span> <span class="nx">db</span><span class="p">.</span><span class="nx">realms</span><span class="p">],</span>
+    <span class="k">async</span> <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="c1">// Create realm (use put instead of add if other client did the same)</span>
+      <span class="kd">const</span> <span class="nx">newRealmId</span> <span class="o">=</span> <span class="nx">getTiedRealmId</span><span class="p">(</span><span class="nx">todoList</span><span class="p">.</span><span class="nx">id</span><span class="p">)</span>
+      <span class="k">await</span> <span class="nx">db</span><span class="p">.</span><span class="nx">realms</span><span class="p">.</span><span class="nx">put</span><span class="p">({</span>
+        <span class="na">realmId</span><span class="p">:</span> <span class="nx">newRealmId</span><span class="p">,</span>
+        <span class="na">name</span><span class="p">:</span> <span class="dl">'</span><span class="s1">A todo list</span><span class="dl">'</span><span class="p">,</span>
+        <span class="na">represents</span><span class="p">:</span> <span class="dl">'</span><span class="s1">a todo list</span><span class="dl">'</span><span class="p">,</span>
+      <span class="p">})</span>
+      <span class="c1">// Move todo-list into the new realm:</span>
+      <span class="k">await</span> <span class="nx">db</span><span class="p">.</span><span class="nx">todoLists</span><span class="p">.</span><span class="nx">update</span><span class="p">(</span><span class="nx">todoList</span><span class="p">.</span><span class="nx">id</span><span class="p">,</span> <span class="p">{</span> <span class="na">realmId</span><span class="p">:</span> <span class="nx">newRealmId</span> <span class="p">})</span>
+      <span class="c1">// Move all todo items into the new realm consistently (modify() is consistent across sync peers)</span>
+      <span class="k">await</span> <span class="nx">db</span><span class="p">.</span><span class="nx">todoItems</span>
+        <span class="p">.</span><span class="nx">where</span><span class="p">({</span> <span class="na">todoListId</span><span class="p">:</span> <span class="nx">todoList</span><span class="p">.</span><span class="nx">id</span> <span class="p">})</span>
+        <span class="p">.</span><span class="nx">modify</span><span class="p">({</span> <span class="na">realmId</span><span class="p">:</span> <span class="nx">newRealmId</span> <span class="p">})</span>
+    <span class="p">}</span>
+  <span class="p">)</span>
+<span class="p">}</span>
+
+<span class="c1">// Consistently delete the list. Also delete its tied realm (even if it is on the private realm)</span>
+<span class="c1">// Reason for always deleting its tied realm is: What if we are offline, and another client has</span>
+<span class="c1">// shared the list while we're not yet aware of this. By always deleting a possible tied realm along</span>
+<span class="c1">// with deleting the list, we make sure that the deletion will also delete the realm if it exists.</span>
+<span class="k">async</span> <span class="kd">function</span> <span class="nx">deleteList</span><span class="p">(</span><span class="nx">todoList</span><span class="p">:</span> <span class="nx">TodoList</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">await</span> <span class="nx">db</span><span class="p">.</span><span class="nx">transaction</span><span class="p">(</span>
+    <span class="dl">'</span><span class="s1">rw</span><span class="dl">'</span><span class="p">,</span>
+    <span class="p">[</span><span class="nx">db</span><span class="p">.</span><span class="nx">todoLists</span><span class="p">,</span> <span class="nx">db</span><span class="p">.</span><span class="nx">todoItems</span><span class="p">,</span> <span class="nx">db</span><span class="p">.</span><span class="nx">realms</span><span class="p">,</span> <span class="nx">db</span><span class="p">.</span><span class="nx">members</span><span class="p">],</span>
+    <span class="p">()</span> <span class="o">=&gt;</span> <span class="p">{</span>
+      <span class="kd">const</span> <span class="nx">tiedRealmId</span> <span class="o">=</span> <span class="nx">getTiedRealmId</span><span class="p">(</span><span class="nx">todoList</span><span class="p">.</span><span class="nx">id</span><span class="p">)</span>
+      <span class="nx">db</span><span class="p">.</span><span class="nx">todoLists</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="nx">todoList</span><span class="p">.</span><span class="nx">id</span><span class="p">)</span>
+      <span class="nx">db</span><span class="p">.</span><span class="nx">todoItems</span><span class="p">.</span><span class="nx">where</span><span class="p">({</span> <span class="na">todoListId</span><span class="p">:</span> <span class="nx">todoList</span><span class="p">.</span><span class="nx">id</span> <span class="p">}).</span><span class="k">delete</span><span class="p">()</span>
+      <span class="c1">// Empty out any tied realm from members:</span>
+      <span class="nx">db</span><span class="p">.</span><span class="nx">members</span><span class="p">.</span><span class="nx">where</span><span class="p">({</span> <span class="na">realmId</span><span class="p">:</span> <span class="nx">tiedRealmId</span> <span class="p">}).</span><span class="k">delete</span><span class="p">()</span>
+      <span class="c1">// Delete the tied realm if it exists:</span>
+      <span class="nx">db</span><span class="p">.</span><span class="nx">realms</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="nx">tiedRealmId</span><span class="p">)</span>
+    <span class="p">}</span>
+  <span class="p">)</span>
+<span class="p">}</span>
+</code></pre></div></div>
+
+<h2 id="private-singleton-ids">Private Singleton IDs</h2>
+
+<p>Private Singleton IDs are primary keys that starts with a hash “#”. They only need to be unique per user and they can be created or referred to no matter whether the user is authenticated or not. When they sync, they can never collide with other user’s private IDs even when being identical.</p>
+
+<p>Some examples when private singleton IDs can be useful:</p>
+
+<ul>
+  <li>You have some personal settings per user and you want the database objects representing a setting to be a singleton instance (one per setting and user).</li>
+  <li>You want a default placeholder to exist for every user. In a music app, it could be “Favourite songs”.</li>
+</ul>
+
+<h3 id="example-personal-settings-object">Example: Personal Settings Object</h3>
+
+<div class="language-ts highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">// Database declaration</span>
+<span class="kd">const</span> <span class="nx">db</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Dexie</span><span class="p">(</span><span class="dl">'</span><span class="s1">MyAppDB</span><span class="dl">'</span><span class="p">)</span>
+<span class="nx">db</span><span class="p">.</span><span class="nx">version</span><span class="p">(</span><span class="mi">1</span><span class="p">).</span><span class="nx">stores</span><span class="p">({</span>
+  <span class="na">personalSettings</span><span class="p">:</span> <span class="dl">'</span><span class="s1">id</span><span class="dl">'</span><span class="p">,</span>
+<span class="p">})</span>
+
+<span class="c1">// Read setting:</span>
+<span class="kd">const</span> <span class="nx">themeSetting</span> <span class="o">=</span> <span class="k">await</span> <span class="nx">db</span><span class="p">.</span><span class="nx">personalSettings</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">'</span><span class="s1">#theme</span><span class="dl">'</span><span class="p">)</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="dl">'</span><span class="s1">User theme is:</span><span class="dl">'</span><span class="p">,</span> <span class="nx">themeSetting</span><span class="p">?.</span><span class="nx">value</span> <span class="o">??</span> <span class="dl">'</span><span class="s1">default-theme</span><span class="dl">'</span><span class="p">)</span>
+
+<span class="c1">// Update setting:</span>
+<span class="k">await</span> <span class="nx">db</span><span class="p">.</span><span class="nx">personalSettings</span><span class="p">.</span><span class="nx">put</span><span class="p">({</span> <span class="na">id</span><span class="p">:</span> <span class="dl">'</span><span class="s1">#theme</span><span class="dl">'</span><span class="p">,</span> <span class="na">value</span><span class="p">:</span> <span class="dl">'</span><span class="s1">dark-mode</span><span class="dl">'</span> <span class="p">})</span>
+</code></pre></div></div>
+
+<p>Like all data in Dexie Cloud, it is allowed to add objects even when not yet authenticated to the server. When user finally authenticates, his or her created objects will get their realmId set to the correct private realmId of the authenticated user and get synced to the server. This goes for private objects only - non-authenticated users may never create or manipulate objects in other realms than the private one.</p>
+
+<p>Adding normal objects with globally unique IDs have a drawback in case you want to avoid multiple instances of an object after logging in to the service and syncing it with existing data (where the action to add the same object had been done by the same user on another client).</p>
+
+<p>Private IDs prohibits getting multiple instances in these cases. The settings example above is a good example.</p>
+
+<ol>
+  <li>User opens app on phone and changes the theme to “light-mode”.</li>
+  <li>User logs in. The #theme object with value “light-mode” is persisted on her account in the cloud.</li>
+  <li>User opens app on desktop (without logging in yet) but now chooses the theme “dark-mode”.</li>
+  <li>User logs in. The #theme object with value “dark-mode” will overwrite the existing “light-mode”.</li>
+  <li>User opens app on a third device where he or she have already logged in before.</li>
+  <li>The latest #theme object is synced to the client and user will get the latest chosed theme (“dark-mode”)</li>
+</ol>
+
+<h3 id="private-singletons-must-never-be-shared">Private Singletons must never be shared</h3>
+
+<p>An object with an private ID (starting with “#”) must never be shared but needs to always lie in the private realm. If your app allows for sharing placeholder objects such as To-do lists, music albums or similar, take special care if the placeholder uses a private ID, and if so, disable the possibility to share it.</p>
+</div>
+          </div>
+        </div>
+        <div class="col-xs-12 col-md-4">
+          <div class="row docs-page-subheader">
+            <h3>Table of Contents</h3>
+            <div class="docs-toc-wrapper">
+              <ul class="docs-toc">
+                            
+                <li>
+                  <a href="/docs/API-Reference"
+                    >API Reference</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/cloud/docs/access-control"
+                    >Access Control in Dexie Cloud</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/cloud/docs/add-demo-users"
+                    >Add demo users</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/cloud/docs/add-public-data"
+                    >Add public data</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/cloud/docs/authentication"
+                    >Authentication in Dexie Cloud</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Tutorial/Best-Practices"
+                    >Best Practices</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Tutorial/Building-Addons"
+                    >Building Addons</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Collection/Collection"
+                    >Collection</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Collection/Collection.and()"
+                    >Collection.and()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Collection/Collection.clone()"
+                    >Collection.clone()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Collection/Collection.count()"
+                    >Collection.count()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Collection/Collection.delete()"
+                    >Collection.delete()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Collection/Collection.desc()"
+                    >Collection.desc()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Collection/Collection.distinct()"
+                    >Collection.distinct()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Collection/Collection.each()"
+                    >Collection.each()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Collection/Collection.eachKey()"
+                    >Collection.eachKey()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Collection/Collection.eachPrimaryKey()"
+                    >Collection.eachPrimaryKey()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Collection/Collection.eachUniqueKey()"
+                    >Collection.eachUniqueKey()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Collection/Collection.filter()"
+                    >Collection.filter()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Collection/Collection.first()"
+                    >Collection.first()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Collection/Collection.keys()"
+                    >Collection.keys()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Collection/Collection.last()"
+                    >Collection.last()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Collection/Collection.limit()"
+                    >Collection.limit()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Collection/Collection.modify()"
+                    >Collection.modify()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Collection/Collection.offset()"
+                    >Collection.offset()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Collection/Collection.or()"
+                    >Collection.or()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Collection/Collection.primaryKeys()"
+                    >Collection.primaryKeys()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Collection/Collection.raw()"
+                    >Collection.raw()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Collection/Collection.reverse()"
+                    >Collection.reverse()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Collection/Collection.sortBy()"
+                    >Collection.sortBy()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Collection/Collection.toArray()"
+                    >Collection.toArray()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Collection/Collection.uniqueKeys()"
+                    >Collection.uniqueKeys()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Collection/Collection.until()"
+                    >Collection.until()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Compound-Index"
+                    >Compound Index</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/cloud/docs/consistency"
+                    >Consistency in Dexie Cloud</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/PropModification/add()"
+                    >Consistent add() operator</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/PropModification/remove()"
+                    >Consistent remove() operator</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/PropModification/replacePrefix()"
+                    >Consistent replacePrefix() operator</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Tutorial/Consuming-dexie-as-a-module"
+                    >Consuming Dexie as a module</a
+                  >
+                </li>
+                    
+                <li>
+                  <a href="/cloud/docs/custom-emails"
+                    >Custom Emails in Dexie Cloud</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/DBCore/DBCore"
+                    >DBCore</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/DBCore/DBCoreAddRequest"
+                    >DBCoreAddRequest</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/DBCore/DBCoreCountRequest"
+                    >DBCoreCountRequest</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/DBCore/DBCoreCursor"
+                    >DBCoreCursor</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/DBCore/DBCoreDeleteRangeRequest"
+                    >DBCoreDeleteRangeRequest</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/DBCore/DBCoreDeleteRequest"
+                    >DBCoreDeleteRequest</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/DBCore/DBCoreGetManyRequest"
+                    >DBCoreGetManyRequest</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/DBCore/DBCoreGetRequest"
+                    >DBCoreGetRequest</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/DBCore/DBCoreIndex"
+                    >DBCoreIndex</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/DBCore/DBCoreKeyRange"
+                    >DBCoreKeyRange</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/DBCore/DBCoreMutateRequest"
+                    >DBCoreMutateRequest</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/DBCore/DBCoreMutateResponse"
+                    >DBCoreMutateResponse</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/DBCore/DBCoreOpenCursorRequest"
+                    >DBCoreOpenCursorRequest</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/DBCore/DBCorePutRequest"
+                    >DBCorePutRequest</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/DBCore/DBCoreQuery"
+                    >DBCoreQuery</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/DBCore/DBCoreQueryRequest"
+                    >DBCoreQueryRequest</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/DBCore/DBCoreQueryResponse"
+                    >DBCoreQueryResponse</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/DBCore/DBCoreRangeType"
+                    >DBCoreRangeType</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/DBCore/DBCoreSchema"
+                    >DBCoreSchema</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/DBCore/DBCoreTable"
+                    >DBCoreTable</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/DBCore/DBCoreTableSchema"
+                    >DBCoreTableSchema</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/DBCore/DBCoreTransaction"
+                    >DBCoreTransaction</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/DBCore/DBCoreTransactionMode"
+                    >DBCoreTransactionMode</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/cloud/docs/DBPermissionSet"
+                    >DBPermissionSet</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Deprecations"
+                    >Deprecations</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/DerivedWork"
+                    >Derived Work</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Tutorial/Design"
+                    >Design</a
+                  >
+                </li>
+                    
+                <li>
+                  <a href="/cloud/docs/dexie-cloud-api"
+                    >Dexie Cloud API</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/cloud/docs/limits"
+                    >Dexie Cloud API Limits</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/cloud/docs/best-practices"
+                    >Dexie Cloud Best Practices</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/cloud/docs/cli"
+                    >Dexie Cloud CLI</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/cloud/docs/"
+                    >Dexie Cloud Docs</a
+                  >
+                </li>
+                    
+                <li>
+                  <a href="/cloud/docs/rest-api"
+                    >Dexie Cloud REST API</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/cloud/docs/web-hooks"
+                    >Dexie Cloud Web Hooks</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Dexie/Dexie"
+                    >Dexie Constructor</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/DexieErrors/Dexie.AbortError"
+                    >Dexie.AbortError</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/DexieErrors/Dexie.BulkError"
+                    >Dexie.BulkError</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/DexieErrors/Dexie.ConstraintError"
+                    >Dexie.ConstraintError</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/DexieErrors/Dexie.DataCloneError"
+                    >Dexie.DataCloneError</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/DexieErrors/Dexie.DataError"
+                    >Dexie.DataError</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/DexieErrors/Dexie.DatabaseClosedError"
+                    >Dexie.DatabaseClosedError</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/DexieErrors/Dexie.IncompatiblePromiseError"
+                    >Dexie.IncompatiblePromiseError</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/DexieErrors/Dexie.InternalError"
+                    >Dexie.InternalError</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/DexieErrors/Dexie.InvalidAccessError"
+                    >Dexie.InvalidAccessError</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/DexieErrors/Dexie.InvalidArgumentError"
+                    >Dexie.InvalidArgumentError</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/DexieErrors/Dexie.InvalidStateError"
+                    >Dexie.InvalidStateError</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/DexieErrors/Dexie.InvalidTableError"
+                    >Dexie.InvalidTableError</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/DexieErrors/Dexie.MissingAPIError"
+                    >Dexie.MissingAPIError</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/DexieErrors/Dexie.ModifyError"
+                    >Dexie.ModifyError</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/DexieErrors/Dexie.NoSuchDatabaseError"
+                    >Dexie.NoSuchDatabaseErrorError</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/DexieErrors/Dexie.NotFoundError"
+                    >Dexie.NotFoundError</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Observable/Dexie.Observable"
+                    >Dexie.Observable</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Observable/Dexie.Observable.DatabaseChange"
+                    >Dexie.Observable.DatabaseChange</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/DexieErrors/Dexie.OpenFailedError"
+                    >Dexie.OpenFailedError</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/DexieErrors/Dexie.PrematureCommitError"
+                    >Dexie.PrematureCommitError</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/DexieErrors/Dexie.QuotaExceededError"
+                    >Dexie.QuotaExceededError</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/DexieErrors/Dexie.ReadOnlyError"
+                    >Dexie.ReadOnlyError</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/DexieErrors/Dexie.SchemaError"
+                    >Dexie.SchemaError</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/DexieErrors/Dexie.SubTransactionError"
+                    >Dexie.SubTransactionError</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Syncable/Dexie.Syncable.js"
+                    >Dexie.Syncable</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Syncable/Dexie.Syncable.IDatabaseChange"
+                    >Dexie.Syncable.IDatabaseChange</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Syncable/Dexie.Syncable.IPersistedContext"
+                    >Dexie.Syncable.IPersistentContext</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Syncable/Dexie.Syncable.ISyncProtocol"
+                    >Dexie.Syncable.ISyncProtocol</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Syncable/Dexie.Syncable.StatusTexts"
+                    >Dexie.Syncable.StatusTexts</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Syncable/Dexie.Syncable.Statuses"
+                    >Dexie.Syncable.Statuses</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Syncable/Dexie.Syncable.registerSyncProtocol()"
+                    >Dexie.Syncable.registerSyncProtocol()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/DexieErrors/Dexie.TimeoutError"
+                    >Dexie.TimeoutError</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/DexieErrors/Dexie.TransactionInactiveError"
+                    >Dexie.TransactionInactiveError</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/DexieErrors/Dexie.UnknownError"
+                    >Dexie.UnknownError</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/DexieErrors/Dexie.UnsupportedError"
+                    >Dexie.UnsupportedError</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/DexieErrors/Dexie.UpgradeError"
+                    >Dexie.UpgradeError()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/DexieErrors/Dexie.VersionChangeError"
+                    >Dexie.VersionChangeError</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/DexieErrors/Dexie.VersionError"
+                    >Dexie.VersionError</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Dexie/Dexie.%5Btable%5D"
+                    >Dexie.[table]</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Dexie/Dexie.addons"
+                    >Dexie.addons</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Dexie/Dexie.async()"
+                    >Dexie.async()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Dexie/Dexie.backendDB()"
+                    >Dexie.backendDB()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Dexie/Dexie.close()"
+                    >Dexie.close()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Dexie/Dexie.currentTransaction"
+                    >Dexie.currentTransaction</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Dexie/Dexie.debug"
+                    >Dexie.debug</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Dexie/Dexie.deepClone()"
+                    >Dexie.deepClone()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Dexie/Dexie.defineClass()"
+                    >Dexie.defineClass()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Dexie/Dexie.delByKeyPath()"
+                    >Dexie.delByKeyPath()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Dexie/Dexie.delete()"
+                    >Dexie.delete()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Dexie/Dexie.derive()"
+                    >Dexie.derive()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Dexie/Dexie.events()"
+                    >Dexie.events()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Dexie/Dexie.exists()"
+                    >Dexie.exists()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Dexie/Dexie.extend()"
+                    >Dexie.extend()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Dexie/Dexie.fakeAutoComplete()"
+                    >Dexie.fakeAutoComplete()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Dexie/Dexie.getByKeyPath()"
+                    >Dexie.getByKeyPath()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Dexie/Dexie.getDatabaseNames()"
+                    >Dexie.getDatabaseNames()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Dexie/Dexie.hasFailed()"
+                    >Dexie.hasFailed()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Dexie/Dexie.ignoreTransaction()"
+                    >Dexie.ignoreTransaction()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Dexie/Dexie.isOpen()"
+                    >Dexie.isOpen()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Dexie.js"
+                    >Dexie.js</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Dexie/Dexie.name"
+                    >Dexie.name</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Dexie/Dexie.on()"
+                    >Dexie.on()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Dexie/Dexie.on.blocked"
+                    >Dexie.on.blocked</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Dexie/Dexie.on.close"
+                    >Dexie.on.close</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Dexie/Dexie.on.error"
+                    >Dexie.on.error</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Dexie/Dexie.on.populate"
+                    >Dexie.on.populate</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Dexie/Dexie.on.populate-(old-version)"
+                    >Dexie.on.populate-(old-version)</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Dexie/Dexie.on.ready"
+                    >Dexie.on.ready</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Dexie/Dexie.on.storagemutated"
+                    >Dexie.on.storagemutated</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Dexie/Dexie.on.versionchange"
+                    >Dexie.on.versionchange</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Dexie/Dexie.open()"
+                    >Dexie.open()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Dexie/Dexie.override()"
+                    >Dexie.override()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Dexie/Dexie.semVer"
+                    >Dexie.semVer</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Dexie/Dexie.setByKeyPath()"
+                    >Dexie.setByKeyPath()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Dexie/Dexie.shallowClone()"
+                    >Dexie.shallowClone()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Dexie/Dexie.spawn()"
+                    >Dexie.spawn()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Dexie/Dexie.table()"
+                    >Dexie.table()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Dexie/Dexie.tables"
+                    >Dexie.tables</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Dexie/Dexie.transaction()"
+                    >Dexie.transaction()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Dexie/Dexie.transaction()-(old-version)"
+                    >Dexie.transaction()-(old-version)</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Dexie/Dexie.use()"
+                    >Dexie.use()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Dexie/Dexie.verno"
+                    >Dexie.verno</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Dexie/Dexie.version"
+                    >Dexie.version</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Dexie/Dexie.version()"
+                    >Dexie.version()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Dexie/Dexie.vip()"
+                    >Dexie.vip()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Dexie/Dexie.waitFor()"
+                    >Dexie.waitFor()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/cloud/docs/DexieCloudOptions"
+                    >DexieCloudOptions</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/DexieErrors/DexieError"
+                    >DexieError</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/"
+                    >Docs Home</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Download"
+                    >Download</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/EntityTable"
+                    >EntityTable</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/ExportImport/dexie-export-import"
+                    >Export and Import Database</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Tutorial/Angular"
+                    >Get started with Dexie in Angular</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Tutorial/React"
+                    >Get started with Dexie in React</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Tutorial/Svelte"
+                    >Get started with Dexie in Svelte</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Tutorial/Vue"
+                    >Get started with Dexie in Vue</a
+                  >
+                </li>
+                    
+                <li>
+                  <a href="/docs/Tutorial/Hello-World"
+                    >Hello World</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/StorageManager"
+                    >How To Use the StorageManager API</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/inbound"
+                    >Inbound</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/IndexSpec"
+                    >IndexSpec</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Indexable-Type"
+                    >Indexable Type</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/IndexedDB-on-Safari"
+                    >IndexedDB on Safari</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/cloud/docs/Invite"
+                    >Invite</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/cloud/docs/Member"
+                    >Member</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Tutorial/Migrating-existing-DB-to-Dexie"
+                    >Migrating existing DB to Dexie</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/MultiEntry-Index"
+                    >MultiEntry Index</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/cloud/docs/PersistedSyncState"
+                    >PersistedSyncState</a
+                  >
+                </li>
+                    
+                <li>
+                  <a href="/privacy"
+                    >Privacy Policy</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Promise/Promise"
+                    >Promise</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Promise/Promise.PSD"
+                    >Promise.PSD</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Promise/Promise.catch()"
+                    >Promise.catch()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Promise/Promise.finally()"
+                    >Promise.finally()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Promise/Promise.on.error"
+                    >Promise.on.error</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Promise/Promise.onuncatched"
+                    >Promise.onuncatched</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Questions-and-Answers"
+                    >Questions and Answers</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/cloud/docs/Realm"
+                    >Realm</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Releasing-Dexie"
+                    >Releasing Dexie</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/roadmap/"
+                    >Road Map</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/roadmap/dexie5.0"
+                    >Road Map: Dexie 5.0</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/roadmap/dexie-cloud"
+                    >Road Map: Dexie Cloud</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/cloud/docs/Role"
+                    >Role</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/cloud/docs/premium-software"
+                    >Run Dexie Cloud on Own Servers</a
+                  >
+                </li>
+                        
+                <li>
+                  <a href="/cloud/docs/scaling"
+                    >Sharding and Scalability</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Simplify-with-yield"
+                    >Simplify with yield</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/stop-the-war"
+                    >Support Ukraine</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/cloud/docs/SyncState"
+                    >SyncState</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Table/Table"
+                    >Table</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/TableSchema"
+                    >Table Schema</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Table/Table.add()"
+                    >Table.add()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Table/Table.bulkAdd()"
+                    >Table.bulkAdd()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Table/Table.bulkDelete()"
+                    >Table.bulkDelete()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Table/Table.bulkGet()"
+                    >Table.bulkGet()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Table/Table.bulkPut()"
+                    >Table.bulkPut()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Table/Table.bulkUpdate()"
+                    >Table.bulkUpdate()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Table/Table.clear()"
+                    >Table.clear()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Table/Table.count()"
+                    >Table.count()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Table/Table.defineClass()"
+                    >Table.defineClass()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Table/Table.delete()"
+                    >Table.delete()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Table/Table.each()"
+                    >Table.each()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Table/Table.filter()"
+                    >Table.filter()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Table/Table.get()"
+                    >Table.get()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Table/Table.hook('creating')"
+                    >Table.hook('creating')</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Table/Table.hook('deleting')"
+                    >Table.hook('deleting')</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Table/Table.hook('reading')"
+                    >Table.hook('reading')</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Table/Table.hook('updating')"
+                    >Table.hook('updating')</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Table/Table.limit()"
+                    >Table.limit()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Table/Table.mapToClass()"
+                    >Table.mapToClass()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Table/Table.name"
+                    >Table.name</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Table/Table.offset()"
+                    >Table.offset()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Table/Table.orderBy()"
+                    >Table.orderBy()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Table/Table.put()"
+                    >Table.put()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Table/Table.reverse()"
+                    >Table.reverse()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Table/Table.schema"
+                    >Table.schema</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Table/Table.toArray()"
+                    >Table.toArray()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Table/Table.toCollection()"
+                    >Table.toCollection()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Table/Table.update()"
+                    >Table.update()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Table/Table.where()"
+                    >Table.where()</a
+                  >
+                </li>
+                    
+                <li>
+                  <a href="/docs/The-Main-Limitations-of-IndexedDB"
+                    >The main limitations of IndexedDB</a
+                  >
+                </li>
+                    
+                <li>
+                  <a href="/docs/Transaction/Transaction"
+                    >Transaction</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Transaction/Transaction.abort()"
+                    >Transaction.abort()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Transaction/Transaction.on.abort"
+                    >Transaction.on.abort</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Transaction/Transaction.on.complete"
+                    >Transaction.on.complete</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Transaction/Transaction.on.error"
+                    >Transaction.on.error</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Transaction/Transaction.table()"
+                    >Transaction.table()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Tutorial/"
+                    >Tutorial</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Typescript"
+                    >Typescript</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Typescript-old"
+                    >Typescript (old)</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Tutorial/Understanding-the-basics"
+                    >Understanding the basics</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/cloud/docs/UserLogin"
+                    >UserLogin</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Version/Version"
+                    >Version</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Version/Version.stores()"
+                    >Version.stores()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Version/Version.upgrade()"
+                    >Version.upgrade()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/WhereClause/WhereClause"
+                    >WhereClause</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/WhereClause/WhereClause.above()"
+                    >WhereClause.above()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/WhereClause/WhereClause.aboveOrEqual()"
+                    >WhereClause.aboveOrEqual()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/WhereClause/WhereClause.anyOf()"
+                    >WhereClause.anyOf()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/WhereClause/WhereClause.anyOfIgnoreCase()"
+                    >WhereClause.anyOfIgnoreCase()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/WhereClause/WhereClause.below()"
+                    >WhereClause.below()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/WhereClause/WhereClause.belowOrEqual()"
+                    >WhereClause.belowOrEqual()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/WhereClause/WhereClause.between()"
+                    >WhereClause.between()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/WhereClause/WhereClause.equals()"
+                    >WhereClause.equals()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/WhereClause/WhereClause.equalsIgnoreCase()"
+                    >WhereClause.equalsIgnoreCase()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/WhereClause/WhereClause.inAnyRange()"
+                    >WhereClause.inAnyRange()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/WhereClause/WhereClause.noneOf()"
+                    >WhereClause.noneOf()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/WhereClause/WhereClause.notEqual()"
+                    >WhereClause.notEqual()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/WhereClause/WhereClause.startsWith()"
+                    >WhereClause.startsWith()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/WhereClause/WhereClause.startsWithAnyOf()"
+                    >WhereClause.startsWithAnyOf()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/WhereClause/WhereClause.startsWithAnyOfIgnoreCase()"
+                    >WhereClause.startsWithAnyOfIgnoreCase()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/WhereClause/WhereClause.startsWithIgnoreCase()"
+                    >WhereClause.startsWithIgnoreCase()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/cloud/docs/db.cloud.configure()"
+                    >db.cloud.configure()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/cloud/docs/db.cloud.currentUser"
+                    >db.cloud.currentUser</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/cloud/docs/db.cloud.currentUserId"
+                    >db.cloud.currentUserId</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/cloud/docs/db.cloud.events.syncComplete"
+                    >db.cloud.events.syncComplete</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/cloud/docs/db.cloud.invites"
+                    >db.cloud.invites</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/cloud/docs/db.cloud.login()"
+                    >db.cloud.login()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/cloud/docs/db.cloud.logout()"
+                    >db.cloud.logout()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/cloud/docs/db.cloud.options"
+                    >db.cloud.options</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/cloud/docs/db.cloud.permissions()"
+                    >db.cloud.permissions()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/cloud/docs/db.cloud.persistedSyncState"
+                    >db.cloud.persistedSyncState</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/cloud/docs/db.cloud.roles"
+                    >db.cloud.roles</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/cloud/docs/db.cloud.schema"
+                    >db.cloud.schema</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/cloud/docs/db.cloud.sync()"
+                    >db.cloud.sync()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/cloud/docs/db.cloud.syncState"
+                    >db.cloud.syncState</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/cloud/docs/db.cloud.userInteraction"
+                    >db.cloud.userInteraction</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/cloud/docs/db.cloud.usingServiceWorker"
+                    >db.cloud.usingServiceWorker</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/cloud/docs/db.cloud.version"
+                    >db.cloud.version</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/cloud/docs/db.cloud.webSocketStatus"
+                    >db.cloud.webSocketStatus</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/cloud/docs/db.members"
+                    >db.members</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/cloud/docs/db.realms"
+                    >db.realms</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/cloud/docs/db.roles"
+                    >db.roles</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Syncable/db.syncable.connect()"
+                    >db.syncable.connect()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Syncable/db.syncable.delete()"
+                    >db.syncable.delete()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Syncable/db.syncable.disconnect()"
+                    >db.syncable.disconnect()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Syncable/db.syncable.getOptions()"
+                    >db.syncable.getOptions()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Syncable/db.syncable.getStatus()"
+                    >db.syncable.getStatus()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Syncable/db.syncable.list()"
+                    >db.syncable.list()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Syncable/db.syncable.on('statusChanged')"
+                    >db.syncable.on('statusChanged')</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Syncable/db.syncable.setFilter()"
+                    >db.syncable.setFilter()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/cloud/docs/dexie-cloud-addon"
+                    >dexie-cloud-addon</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/libs/dexie-react-hooks"
+                    >dexie-react-hooks</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/liveQuery()"
+                    >liveQuery()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/Promise/unhandledrejection-event"
+                    >unhandledrejection-event</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/dexie-react-hooks/useLiveQuery()"
+                    >useLiveQuery()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/dexie-react-hooks/useObservable()"
+                    >useObservable()</a
+                  >
+                </li>
+                  
+                <li>
+                  <a href="/docs/dexie-react-hooks/usePermissions()"
+                    >usePermissions()</a
+                  >
+                </li>
+                 
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer class="container">
+  <p>Dexie.js - A Minimalistic Wrapper for IndexedDB</p>
+  <p>&copy; 2014-2024 Dexie.js is the creation of David Fahlander and managed by Awarica AB.</p>
+</footer>
+
+    <script src="/assets/js/prism-2020.js"></script>
+    <script src="/assets/js/prism-svelte.js"></script>
+    <script src="/assets/js/jquery.min.js"></script>
+    <script src="/assets/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/manucaralmo/GlowCookies@3.1.8/src/glowCookies.min.js"></script>
+<script>
+  document.getElementById('cookie-settings-icon').style.display = localStorage.getItem('GlowCookies') == "1" ? 'none' : '';
+  glowCookies.start('en', {
+      style: 1,
+      analytics: 'G-7W0YET4Q10',
+      hideAfterClick: true,
+      policyLink: 'https://dexie.org/privacy',
+      customScript: [{ type: 'custom', position: 'body', content: "updateSwitchFromStorage();" }]
+  });
+</script>
+<!--
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7W0YET4Q10"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7W0YET4Q10');
+</script>
+-->
+
+
+    <!-- Include dexie for people wanting to open devtools to laborate -->
+    <script async src="https://unpkg.com/dexie"></script>
+
+    <!-- Highlight anchors the same way as github wiki works -->
+    <script defer src="/assets/js/highlight-anchors.js"></script>
+
+    <!-- Allow shoutouts -->
+    <script src="/assets/js/anime.min.js"></script>
+    <script src="/assets/js/shoutouts.js"></script>
+  </body>
+</html>

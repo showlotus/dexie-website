@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
   <head>
   <meta charset="utf-8" />
@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <title>
-    Purchase Subscription
+    Server Software License Terms
   </title>
   <meta
     name="description"
@@ -27,6 +27,7 @@
 
 
   <body>
+
 		<nav class="navbar navbar-default" style="z-index: 10;">
   <div class="container-fluid">
     <!-- Brand and toggle get grouped for better mobile display -->
@@ -142,113 +143,122 @@
       }
     });
 </script>
-
     <header class="site-header">
-  <div class="jumbotron docs-page-jumbotron ">
+  <div class="jumbotron docs-page-jumbotron dexie-cloud">
+    <div class="video-parent">
+      <video class="banner-video" autoplay muted loop>
+        <source src="https://dexie.blob.core.windows.net/dexie/Galaxy.mp4" type="video/mp4">
+      </video>
+    </div>
     <div class="container">
-      <!-- <div style="position:relative; margin:0;padding:0; width: 100%;">
-        <a href="/cloud/" style="position: absolute; top: 0; right: 200px;">
-          <h1>Need Sync?</h1>
-        </a>
-      </div> -->
-      
-      
-      
-      <h1>
-      Purchase Subscription
-      </h1>
-      
-
-      
-    
-      <!-- <a href="/cloud/" id="cloud-promoter">
-        <div class="shoutouts">
-          <p>Need sync?</p>
-          <p>Create collaborative offline-first apps</p>
-          <p>Easy to get started</p>
-        </div>
-        <p>Coming soon: Dexie Cloud<span class="beta">BETA</span><span style="display: inline-block; margin-left: -1em;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&raquo;</span></p>
-      </a>  
-      -->
+      <img src="/assets/images/dexie-logo-icon.svg" class="dexie-logo-icon" />
+      <h1><a href="/cloud/">Dexie Cloud</a></h1>
+      <p>A sync service for Dexie.js</p>
+      <a style="width: fit-content" class='getstarted btn btn-success btn-lg' href='#getting-started' role='button'>
+        <span class='glyphicon glyphicon-flash'></span>
+        <span class='widescreen'>Get Started!</span>
+        <span class='slimscreen'>Get Started!</span>
+      </a>
       
 <!-- <div id="current-announcement" style="font-size: 14pt; padding-top: 4px; /*position: absolute; top: 50px; right: 50px;*/">
   <a href="/announcements/2024-03-27" style="color: white; text-decoration: underline;">Announcement: Dexie Cloud is now publicly released!</a>💥 
 </div>-->
 
 
-      <!-- Github star button -->
-<div id="star-button">
-  <!-- Place this tag where you want the button to render. -->
-  <a class="github-button" href="https://github.com/dexie/Dexie.js" data-size="large" data-show-count="true" aria-label="Star dfahlander/Dexie.js on GitHub">Star</a>
-</div>
-<!-- Place this tag in your head or just before your close body tag. -->
-<script async defer src="https://buttons.github.io/buttons.js"></script>
-
+      <script>
+        if (location.pathname !== '/cloud/') {
+          document.querySelectorAll('.getstarted.btn').forEach(btn => {
+            btn.href = '/cloud/#getting-started'
+          })
+        }
+      </script>
     </div>
-</div>
+  </div>
 </header>
-<script src="/assets/js/anime.min.js"></script>
-<script src="/assets/js/shoutouts.js"></script>
 
 
     <main class="container">
-          <div class='container' id="prod-edition">
-      <div class='row'>
-        <div class="col-md-12">
-          <h2 style="text-align: center; margin: 30px 0;">Dexie Cloud Production</h2>
-        </div>
+      <div id="signup-form" style="display: none;">
+  <div class="row">
+    <div class="col-md-12">
+      <h3>Try Dexie Cloud Now!</h3>
+      <br/>
+      <label for="emailAddressInput">Please enter email address to request <b>early-bird access</b></label>
+      <div class="input-group input-group-lg">
+        <span class="input-group-addon">@</span>
+        <input id="emailAddressInput" type="text" autocomplete="email" class="form-control" placeholder="you@example.com">
       </div>
-      <div class='row'>
-        <div class='col-md-3'>
-          <div class="pricing-box production" role="button" data-section="#prod-edition" onclick="location.href='https://buy.stripe.com/14k9CEgSne5D1BS8ww'">
-  <h4>Production (SaaS)</h4>
-  <p class="price">$ 0.12 / user / mo</p>
-  <ul class="features">
-    <li>25+ prod users</li>
-    <li>25+ GB</li>
-    <li>50+ connections</li>
-    <li>Infinite eval users</li>
-    <li>Increased rate-limits</li>
-  </ul>
-  <p class="explanation">
-    Choose this option when users get on-board
-  </p>
-</div>
-
-        </div>
-        <div class='col-md-9'>
-          <!-- <div class="pricing-box-height" style="position:relative;">
-            <div class="vertical-center"> -->
-            <div class="pricing-box-height" style="margin: 20px 5px; position: relative;">
-              <p style="font-size: 20px; margin-bottom: 16px;">When it's time to get serious!</p>
-              <p style="font-size: 16px;padding-left: 24px;"><i class="fa fa-hand-o-right" aria-hidden="true" style="margin-left: -24px; width: 24px;"></i>
-                Subscription is purchased in packs of <b>25 seats</b> for only <b>$3</b> per month. 
-              </p>
-              <p style="font-size: 16px;padding-left: 24px;"><i class="fa fa-hand-o-right" aria-hidden="true" style="margin-left: -24px; width: 24px;"></i>
-                After purchase, use <a href="https://manager.dexie.cloud" targe="_blank">Dexie Cloud Manager</a> to assign seats to your end users.
-              </p>
-              <p style="font-size: 16px;padding-left: 24px;"><i class="fa fa-hand-o-right" aria-hidden="true" style="margin-left: -24px; width: 24px;"></i>
-                Increase or decrease number of seat packs with a few clicks in <a href="https://manager.dexie.cloud" targe="_blank">Dexie Cloud Manager</a>.
-              </p>
-              <p style="font-size: 16px; padding-left: 24px;"><i class="fa fa-hand-o-right" aria-hidden="true" style="margin-left: -24px; width: 24px;"></i>
-                Automate users and seat assignment using the <a href="https://dexie.org/cloud/docs/rest-api">REST api</a>.
-              </p>
-              <br/>
-              <p class="quote small" style="margin-left: 36px;">"Dexie Cloud gave Fablehenge a truly backendless experience and has been essential for our tiny dev team to ship big features like it already happened. It is the perfect abstraction in front of the endless complexity two-way sync normally entails. Just write your data to IndexedDB with Dexie's best-in-class API. It'll show up where it's supposed to. Nothing could be simpler."</p>
-              <p class="quote-author small">- Dusty Phillips, founder of Fablehenge</p>
-              <!-- <p class="quote">"Dexie Cloud opens doors to a world of possibilities and makes me look forward to every step of our journey, including multiple apps, prototypes, and client projects."</p> 
-              <p class="quote-author small">- Bennie Forss, Zenta AB</p>-->
-
-              <p style="font-size: 20px;">
-                <a href="https://buy.stripe.com/14k9CEgSne5D1BS8ww">Buy now &raquo;</a>
-              </p>
-            </div>
-            <!-- </div>
-          </div> -->
-        </div>
+      <div id="emailAddrAlert" class="alert alert-warning" role="alert" style="display: none;">
+        Invalid email address
       </div>
     </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <p>We will not share your email with anyone else.</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <button class="btn btn-primary mb-2 applyBetaBtn" id="applyBetaBtn"></span> Submit! </button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12" style="margin-top:8px;">
+      <p>Also, keep an eye on the <a style="color: rgb(61, 240, 156); text-decoration: underline;" href="https://medium.com/dexie-js" target="dexie-blog">Dexie.js blog</a> for road map and other updates.</p>
+    </div>
+  </div>
+  <hr/>
+</div>
+<div id="form-prompts" style="display: none;">
+  <div id="form-prompts-spinner">
+    <div>
+      <img src="/assets/images/ellipsis-loader.svg" style="padding: 0; margin: 8px; border: 0" />
+      Please wait...
+    </div>
+  </div>
+  <div id="form-prompts-area">          
+  </div>
+  <hr/>
+</div>
+<script src="/assets/js/form-prompts.js"></script>
 
+      <h1 id="terms-of-our-server-software-license">Terms of Our Server Software License</h1>
+
+<p>The <strong>Dexie Cloud On-Prem Silver Software</strong> includes binaries and documentation necessary to deploy Dexie Cloud on your own infrastructure.</p>
+
+<p>The <strong>Dexie Cloud On-Prem Gold Software</strong> includes all in Silver plus source code and access to our private git repository.</p>
+
+<h2 id="purpose-of-our-software-licenses">Purpose of Our Software Licenses</h2>
+
+<p>Our software licenses aims:</p>
+
+<ul>
+  <li>To grant you complete control over your infrastructure, including locations, cloud providers, hardware, etc.</li>
+  <li>To prevent vendor lock-in and promote freedom in customizing the software to suit your application’s needs.</li>
+  <li>To enable modification of the source code for tailored adjustments to your application.</li>
+  <li>To support an unlimited number of end users for your application without additional charges.</li>
+  <li>To empower you to serve your application independently, without constraints on your business model when using Dexie Cloud for data storage and synchronization.</li>
+</ul>
+
+<p>However, certain limitations still apply under this license, as detailed below.</p>
+
+<h3 id="-restrictions-on-competition"><i class="fa fa-hand-o-right" aria-hidden="true"></i> Restrictions on Competition</h3>
+
+<p>This license prohibits the copying, selling, or other forms of redistributing the source code or binaries to other companies except when being used to host apps developed by your company only. While the software can be used to serve your application globally without extra costs, you are not permitted to distribute or sell the Dexie Cloud Server software itself as a general storage platform for 3rd party apps. A purchased Dexie Cloud Server license is exclusively for internal use by the purchasing company, functioning as a storage platform for company-owned application(s).</p>
+
+<p><em>Note: This restriction pertains to Dexie Cloud Server (private source), not Dexie.js (open source, Apache 2.0 licensed).</em></p>
+
+<p>If you require a redistribution license, kindly <a href="mailto:sales@awarica.com">get in touch</a>.</p>
+
+<h3 id="-prohibition-of-competing-cloud-offering"><i class="fa fa-hand-o-right" aria-hidden="true"></i> Prohibition of Competing Cloud Offering</h3>
+
+<p>This license does not authorize the establishment of a Dexie Cloud service for external applications beyond the apps developed by your company. Hosting third-party developers as tenants on your Dexie Cloud server necessitates a license for each external company, or alternatively, a distinct agreement with us for such usage.</p>
+
+<p>If you are interested in providing Dexie Cloud as a service to external companies (similar to our offering), please <a href="mailto:sales@awarica.com">contact us</a> to explore suitable arrangements.</p>
+
+<p>For further information and details, consult the <a href="/cloud/docs">Dexie Cloud Documentation</a>.
+<br /><br /><br /><br /><br /><br /><br /></p>
 
     </main>
 
@@ -259,9 +269,9 @@
 
 
     <script src='/assets/js/prism-2020.js'></script>
-    <script src='/assets/js/prism-svelte.js'></script>
 		<script src='/assets/js/jquery.min.js'></script>
-		<script src='/assets/js/bootstrap.min.js'></script>
+    <script src='/assets/js/bootstrap.min.js'></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.0/anime.min.js"></script>    
 
     <script src="https://cdn.jsdelivr.net/gh/manucaralmo/GlowCookies@3.1.8/src/glowCookies.min.js"></script>
 <script>

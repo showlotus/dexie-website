@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>
+    Dexie Cloud is Released
+  </title>
+  <meta
+    name="description"
+    content="The easiest way to use IndexedDB. A lightweight, minimalistic wrapper that provides a straightforward API for developers using IndexedDB."
+  />
+
+  <link href="/assets/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="/assets/css/prism-vscode-dark.css" rel="stylesheet" />
+  <link href="/assets/css/stylesheet.css" rel="stylesheet" />
+  <link href="/assets/css/docs.css" rel="stylesheet" />
+  <link href="/assets/css/font-awesome.min.css" rel="stylesheet" />
+  <link rel="shortcut icon" href="/assets/images/favicon-yuri.png" />
+  <script src="/assets/js/offline-switch.js"></script>
+  <script src="/assets/js/prism-highlight.js"></script>
+  <script src="/assets/js/ukraine2.js"></script>
+</head>
+
+
+  <body>
+		<nav class="navbar navbar-default" style="z-index: 10;">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <!-- <a class="navbar-brand" href="/" style="background-image: url('/assets/images/dexie-logo-icon-menu-dark-bkgimg.svg'); background-repeat: no-repeat; background-position: 7px 8px;">Dexie.js</a> -->
+      <a class="navbar-brand" href="/stop-the-war" style="white-space: nowrap;"><img alt="Support Ukraine!" src="/assets/images/ukraine-flag.png" style="
+        float: left;
+        height: 16px;
+        width: 16px;
+        margin: 2px 4px 0 0;
+    "> </a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <li><a href="/"><img alt="" src="/assets/images/dexie-logo-icon-menu-dark-img.svg" class="dexie-logo-icon-menu" />Dexie.js</a></li>
+        <li><a href="/cloud/"><img alt="" src="/assets/images/dexie-logo-icon-menu-dark-img.svg" class="dexie-logo-icon-menu" />Dexie Cloud</a></li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Docs <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="/docs/Tutorial/Getting-started">Getting Started</a></li>
+            <li><a href="/docs/Samples">Dexie.js Samples</a></li>
+            <li><a href="/docs/">Dexie.js Docs</a></li>
+            <li><a href="/docs/API-Reference#quick-reference">Dexie.js Cheat Sheet</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="/cloud/docs/">Dexie Cloud Docs</a></li>
+            <li><a href="/cloud/docs/cli">Dexie Cloud CLI</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Support <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="http://stackoverflow.com/questions/tagged/dexie">Dexie Questions on StackOverflow</a></li>
+            <li><a href="https://github.com/dexie/Dexie.js/issues?utf8=%E2%9C%93&q=is%3Aissue%20label%3Aquestion">Questions on GitHub</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="http://stackoverflow.com/questions/ask?tags=dexie">Ask Dexie question on Stackoverflow (best chance for a reply)</a></li>
+            <li><a href="https://github.com/dexie/Dexie.js/issues/new?labels=cloud,question">Ask Dexie Cloud question on GitHub</a></li>
+            <li><a href="https://github.com/dexie/Dexie.js/issues/new">File a GitHub issue on Dexie.js</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="/contact#private-support-issues">Private support</a></li>
+            <li><a href="https://betteruptime.com/report/ArgfwoqUmwYQCdwYWHRUDkdc">Report issue with Dexie Cloud service</a></li>
+            <li><a href="https://www.dexie-cloud-status.com" target="dexie-cloud-status">Dexie Cloud Status</a></li>
+            <li role="separator" class="divider"></li>
+            <li><a href="/contact">Contact</a></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Who uses Dexie? <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a target="_blank" href="https://www.whatsapp.com/"><img class="icon" src="/assets/images/whatsapp.png"> WhatsApp</a></li>
+            <li><a target="_blank" href="https://totodo.app/"><img class="icon" src="/assets/images/totodo.ico"> To To-Do - AI Integrated Life Organizer</a></li>
+            <li><a target="_blank" href="https://todo.microsoft.com/"><img class="icon" src="/assets/images/microsoft-todo.ico"> Microsoft To Do</a></li>
+            <li><a target="_blank" href="https://desktop.github.com/"><img class="icon" src="/assets/images/github-desktop-icon.svg" > GitHub Desktop</a></li>
+            <li><a target="_blank" href="https://www.flightradar24.com/"><img class="icon" src="/assets/images/flightradar24.svg"> Flightradar24 - real-time flight info</a></li>
+            <li><a target="_blank" href="https://www.loom.com/"><img class="icon" src="/assets/images/loom.ico"> Loom - Video messaging</a></li>
+            <li><a target="_blank" href="https://wire.com/"><img class="icon" src="/assets/images/wire-icon.ico"> Wire - An end-to-end encrypted chat application</a></li>
+            <li><a target="_blank" href="https://github.com/dexie/Dexie.js/network/dependents?package_id=UGFja2FnZS0xMzg0ODIyOQ%3D%3D">... more than 20,000 repos on GitHub</a></li>
+          </ul>
+        </li>
+        <li><a href="/contact">Contact </a></li>
+        
+        <li><a href="https://github.com/dexie/Dexie.js/releases">Releases </a></li>
+        <li><a href="/roadmap/">Road Map</a></li>
+        <li><a href="https://medium.com/dexie-js" target="dexie-blog">Blog </a></li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+
+    <div id="offline-switch">
+  <span id="offline-switch-enabled" style="display:none;" title="Make Dexie documentation available offline">
+    <span id="offlineOffHeading">Make offline</span>
+    <span id="offlineOnHeading">Available offline</span>
+    <label class="switch">
+      <input
+        id="offline-checkbox"
+    aria-labelledby="offlineOffHeading"
+        type="checkbox"
+        onchange="setOffline(event.target.checked)"
+      />
+      <span class="slider round"></span>
+    </label>
+  </span>
+  <img id="cookie-settings-icon"
+    src="/assets/images/cookie-32.png"
+    style="margin-left: 8px; width:24px;height: 24px;margin-top: -4px; cursor:pointer; display: none;"
+    alt="Cookie settings"
+    title="Cookie settings"
+    onclick="glowCookies.openSelector();"
+  />
+  <!-- <script>
+    updateSwitchFromStorage();
+  </script> -->
+</div>
+
+    
+  </div><!-- /.container-fluid -->
+</nav>		
+<script>
+    document.querySelectorAll('nav.navbar ul>li>a').forEach(function (a) {
+      var href = a.getAttribute('href');
+      href = href && href.split('#')[0];
+      if (href && location.pathname === href) {
+        //console.log("Selected: ", a.href);
+        a.closest('li').className += ' active';
+      }
+    });
+</script>
+
+    <header class="site-header">
+  <div class="jumbotron docs-page-jumbotron announcement-banner">
+    <div class="container">
+      <!-- <div style="position:relative; margin:0;padding:0; width: 100%;">
+        <a href="/cloud/" style="position: absolute; top: 0; right: 200px;">
+          <h1>Need Sync?</h1>
+        </a>
+      </div> -->
+      
+      
+      
+      <img src="/assets/images/dexie-logo-icon.svg" class="dexie-logo-icon" />
+      
+      <h1>
+      Dexie Cloud is Released
+      </h1>
+      
+
+      
+      <p class="date-stamp">Wednesday Mars 27, 2024</p>
+      
+    
+      <!-- <a href="/cloud/" id="cloud-promoter">
+        <div class="shoutouts">
+          <p>Need sync?</p>
+          <p>Create collaborative offline-first apps</p>
+          <p>Easy to get started</p>
+        </div>
+        <p>Coming soon: Dexie Cloud<span class="beta">BETA</span><span style="display: inline-block; margin-left: -1em;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&raquo;</span></p>
+      </a>  
+      -->
+      
+
+      <!-- Github star button -->
+<div id="star-button">
+  <!-- Place this tag where you want the button to render. -->
+  <a class="github-button" href="https://github.com/dexie/Dexie.js" data-size="large" data-show-count="true" aria-label="Star dfahlander/Dexie.js on GitHub">Star</a>
+</div>
+<!-- Place this tag in your head or just before your close body tag. -->
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+
+    </div>
+</div>
+</header>
+<script src="/assets/js/anime.min.js"></script>
+<script src="/assets/js/shoutouts.js"></script>
+
+
+    <main class="container">
+      
+
+
+
+<style>
+  main p {
+    font-size: 20px; font-family: 'Times New Roman', Times, serif; padding-bottom: 24px;
+  }
+</style>
+
+
+<p>Dear Developers and App-Creators!</p>
+
+<p><img class="headshot" style="width: 400px; height: auto; float:right;" src="/assets/images/david-linkedin.jpeg" />
+I am thrilled to announce that Dexie Cloud is now finally in official production, after three years of dedication, hard work, and perseverance. This journey has been nothing short of extraordinary, characterized by countless late nights, technological breakthroughs, and the unwavering support of our invaluable beta users.</p>
+
+<p>For me, this isn’t just about creating another product; it’s about offering something that makes it easier and more enjoyable to build apps that truly work in everyday life.</p>
+
+<p>Dexie Cloud is the culmination of my passion for technology and programming. I wanted to create a tool that not only streamlines the programming process but also provides a delightful user experience. With Dexie Cloud, you get a comprehensive solution for data storage and synchronization, meaning you can create apps that run smoothly and reliably, even when there’s no stable network connection. I hereby invite you to experience what I believe is the future of app development.</p>
+
+<p>Let’s innovate, create, and thrive with Dexie Cloud!</p>
+
+<p>David Fahlander, Author of Dexie.js</p>
+
+<p><em>Read more on: <a href="/cloud">https://dexie.org/cloud</a></em></p>
+
+<p><br />
+<br /></p>
+<h2 style="text-align: center">
+  Testimonials (from our beta program...)
+</h2>
+<p><br /></p>
+
+<style>
+  .testimonial {
+    background-color: #f9f9f9;
+    padding: 20px;
+    margin: 20px;
+    border-radius: 10px;
+    min-height: 350px;
+  }
+  @media (max-width: 768px) {
+    .testimonial {
+      margin: 20px 0;
+      padding: 5px;
+    }
+  }
+  
+  .testimonial p.undertext {
+    font-size: 14px;
+    font-family: Georgia, Times, 'Times New Roman', serif;
+  }
+</style>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="testimonial">
+        <img class="headshot" style="float:left;" src="/assets/images/testimonials/bennie.jpg" />
+        <p class="quote small">
+          “After exploring several options, including major players like Firebase, I felt constrained by their complexity and locking structures. I sought a platform that not only fostered creativity but also expanded our possibilities.
+          <br />
+
+          That's when I discovered Dexie Cloud. In just one year, <b>I've single-handedly built a hybrid web and mobile application for iOS and Android, complete with automatic data synchronization across all devices.</b> The transition from traditional Dexie with live queries to fully integrated Dexie Cloud was seamless and took only a few minutes.
+          <br /><br />
+          <b>What truly sets Dexie Cloud apart is its ability to unleash productivity and nurturing creativity</b>. Unlike other platforms, Dexie Cloud doesn't confine our visions; it expands them. It gives us the freedom to explore and experiment without being limited by complex structures or preconceived ideas.
+          <br /><br />
+
+          Moreover, the support, documentation, and community have been invaluable. Dexie Cloud is more than just a service; it supports and inspires growth and progress.
+          <br /><br />
+          
+          <b>I'm completely sold!</b> Even considering alternatives like CouchDB or Firestore now feels restrictive and cumbersome. <b>Dexie Cloud opens doors to a world of possibilities</b> and makes me look forward to every step of our journey, including multiple apps, prototypes, and client projects."
+        </p>
+        <p class="quote-author small">- Bennie Forss, Founder of Zenta AB</p>
+        <p class="undertext">
+          <a href="https://www.zenta.se/">Zenta AB</a> is using Dexie Cloud to power their app <a href="https://totodo.app">To To-do</a>. It's an AI-driven offline-first task manager that helps users plan their day and reach their goals: <a href="https://totodo.app">https://totodo.app</a>
+        </p>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="testimonial">
+        <img class="headshot" style="float:right;" src="/assets/images/testimonials/albarin.jpg" />
+        <p class="quote small">
+          “I started using Dexie for my project, and I was worried about integrating user authentication and synchronization into it. However,
+          <b>when I discovered Dexie Cloud, I was amazed at how seamlessly I could integrate it into my app.</b> Within minutes, I had my application fully synchronized and authenticated. The documentation provided by Dexie Cloud was also very helpful. It's well-organized and has lots of examples that made it easy to understand and use."
+        </p>
+        <p class="quote-author small">- Alba Rincon, founder of Routickr</p>
+        <p class="undertext">
+          <a href="https://www.routickr.com">Routickr</a> is an app that will help users to transform their goals into lasting habits: <a href="https://www.routickr.com">https://www.routickr.com</a>.
+        </p>
+      </div>
+
+      <div class="testimonial">
+        <img class="headshot" style="float:right;" src="/assets/images/testimonials/dusty2.jpeg" />
+        <p class="quote small">
+          “<b><u>Offline-first web apps are no longer difficult</u></b>. Dexie Cloud gave Fablehenge a truly backendless experience and has been essential for our tiny dev team to ship big features like it already happened.
+          <b>It is the perfect abstraction in front of the endless complexity two-way sync normally entails.</b>
+          Just write your data to IndexedDB with Dexie's best-in-class API. It'll show up where it's supposed to. Nothing could be simpler."
+        </p>
+        <p class="quote-author small">- Dusty Phillips, founder of Fablehenge</p>
+        <p class="undertext">
+          <a href="https://www.fablehenge.com/">Fablehenge</a> is an app for story writers to help them track their character relationships, reorganize their outline, and manage their drafts: <a href="https://www.fablehenge.com/">https://www.fablehenge.com/</a>
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+      <div class="testimonial">
+        <img class="headshot" style="float:left;" src="/assets/images/testimonials/naton2.jpeg" />
+        <p class="quote small">
+          “The speed with which you can start and complete an observation is crucial to whether you will prefer my app to Notes - or even pen and paper - at all.
+
+          <b>The discovery of Dexie Cloud made me realize that my bird lists could be shared with others and that there were also ready-made code examples</b> on how to manage invitations, rights and similar things.”          
+        </p>
+        <p class="quote-author small">- Anton Andreasson, founder of Birdlist</p>
+
+        <p class="undertext">
+          <a href="https://birdlist.app/">Birdlist</a> is an app for birdwatchers that helps them log their observations, create lists, and share them with friends.
+        </p>
+      </div>
+    </div>
+    <div class="col-md-6">
+    </div>
+  </div>
+</div>
+
+<hr />
+
+<style>
+  .what-is-dexie-cloud {
+    max-width: 800px;
+    margin: auto;
+    padding: 12px 40px;
+    border-radius: 8px;
+    border: 1px solid #c3a9ca;
+    background-color: #ebc1f3;
+    color: #0f0329;
+  }
+
+  @media (max-width: 768px) {
+    .what-is-dexie-cloud {
+      padding: 12px 12px;
+    }
+  }
+
+  .what-is-dexie-cloud h2 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    padding: 12px 0;
+  }
+
+  .what-is-dexie-cloud h3 {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    padding: 12px 0;
+  }
+
+  .what-is-dexie-cloud p, .what-is-dexie-cloud li, .what-is-dexie-cloud a {
+    font-size: 18px;
+    line-height: 1.5;
+  }
+
+  .what-is-dexie-cloud p, .what-is-dexie-cloud li, .what-is-dexie-cloud a, .what-is-dexie-cloud h1, .what-is-dexie-cloud h2, .what-is-dexie-cloud h3 {
+    font-family: Arial, Helvetica, sans-serif;
+    margin-bottom: 15px;
+  }
+
+  .what-is-dexie-cloud h1 {
+    margin-bottom: 24px;
+    font-weight: bold;
+  }
+
+  .what-is-dexie-cloud ul {
+    font-size: 16px;
+    line-height: 1.5;
+    margin-bottom: 15px;
+  }
+
+</style>
+
+<div class="what-is-dexie-cloud">
+  <h1>What is Dexie Cloud?</h1>
+
+  <p>Dexie Cloud is a cutting-edge software solution for app developers seeking optimal performance in challenging network conditions. It is developed as an extension to the Awarica initiated and driven open source project Dexie.js, a software library that has over 10,000 stars on Github and used by well known apps and brands including Whatsapp, Loom, Microsoft To Do and Walmart + tens of thousands other web sites, libraries and apps. The major add-on is that Dexie Cloud has online synchronization.
+  </p>
+
+  <h3>Dexie Cloud’s key features are:</h3>
+
+  <ul>
+    <li><b>Data Storage:</b>
+      Dexie Cloud offers a comprehensive solution for data management, empowering developers to efficiently store and
+      manage data.  
+    </li>
+    <li><b>Data Synchronization:</b>
+      Elevate your app's user experience by seamlessly synchronizing data between the client and server, ensuring uninterrupted connectivity and eliminating delays or inconsistencies.
+    </li>
+    <li><b>Offline Reliability:</b>
+      Dexie Cloud enables flawless offline operation, allowing users to access critical features without interruption, ensuring a consistently smooth interaction. The data in the cloud is protected using authentication and authorization to prohibit unauthorized access. Collaborative online apps can be easily created, allowing multiple users to share data without the need for a server. Additionally, with offline support, users can send chat messages or access conversations seamlessly even when the network is down.
+    </li>
+  </ul>
+
+  <h2>So what’s the revolutionizing idea with Dexie Cloud?</h2>
+
+  <p>
+    Dexie Cloud <b>simplifies app development, significantly enhancing speed and cost-effectiveness</b>.
+    It allows developers to create advanced apps with expertise in just one area, centralizes security measures, and
+    reduces repetitive code, resulting in streamlined innovation and lower costs.
+    By adopting the '<b>local first</b>' approach, Dexie Cloud ensures optimal performance.
+    This framework challenges the traditional methodology of app development and offers a smoother
+    and more efficient alternative to meet the growing demands of the industry.
+    Check it out here to learn more: <a href="/cloud/">https://dexie.org/cloud/</a>.
+  </p>
+</div>
+
+<p><br /></p>
+
+
+
+    </main>
+
+    <footer class="container">
+  <p>Dexie.js - A Minimalistic Wrapper for IndexedDB</p>
+  <p>&copy; 2014-2024 Dexie.js is the creation of David Fahlander and managed by Awarica AB.</p>
+</footer>
+
+
+    <script src='/assets/js/prism-2020.js'></script>
+    <script src='/assets/js/prism-svelte.js'></script>
+		<script src='/assets/js/jquery.min.js'></script>
+		<script src='/assets/js/bootstrap.min.js'></script>
+
+    <script src="https://cdn.jsdelivr.net/gh/manucaralmo/GlowCookies@3.1.8/src/glowCookies.min.js"></script>
+<script>
+  document.getElementById('cookie-settings-icon').style.display = localStorage.getItem('GlowCookies') == "1" ? 'none' : '';
+  glowCookies.start('en', {
+      style: 1,
+      analytics: 'G-7W0YET4Q10',
+      hideAfterClick: true,
+      policyLink: 'https://dexie.org/privacy',
+      customScript: [{ type: 'custom', position: 'body', content: "updateSwitchFromStorage();" }]
+  });
+</script>
+<!--
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7W0YET4Q10"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7W0YET4Q10');
+</script>
+-->
+
+
+
+    <!-- Include dexie for people wanting to open devtools to laborate -->
+    <script async src='https://unpkg.com/dexie'></script>
+    
+    <!-- Highlight anchors the same way as github wiki works -->
+    <script defer src="/assets/js/highlight-anchors.js"></script>
+    
+  </body>
+
+</html>
